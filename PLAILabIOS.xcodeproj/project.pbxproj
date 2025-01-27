@@ -1,0 +1,567 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		4B13DC862D471C7E00378B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B13DC6D2D471C7D00378B82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B13DC742D471C7D00378B82;
+			remoteInfo = PLAILabIOS;
+		};
+		4B13DC902D471C7E00378B82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B13DC6D2D471C7D00378B82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B13DC742D471C7D00378B82;
+			remoteInfo = PLAILabIOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4B13DC752D471C7D00378B82 /* PLAILabIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLAILabIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B13DC852D471C7E00378B82 /* PLAILabIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAILabIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAILabIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4B13DC772D471C7D00378B82 /* PLAILabIOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PLAILabIOS;
+			sourceTree = "<group>";
+		};
+		4B13DC882D471C7E00378B82 /* PLAILabIOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PLAILabIOSTests;
+			sourceTree = "<group>";
+		};
+		4B13DC922D471C7E00378B82 /* PLAILabIOSUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PLAILabIOSUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4B13DC722D471C7D00378B82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC822D471C7E00378B82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC8C2D471C7E00378B82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4B13DC6C2D471C7D00378B82 = {
+			isa = PBXGroup;
+			children = (
+				4B13DC772D471C7D00378B82 /* PLAILabIOS */,
+				4B13DC882D471C7E00378B82 /* PLAILabIOSTests */,
+				4B13DC922D471C7E00378B82 /* PLAILabIOSUITests */,
+				4B13DC762D471C7D00378B82 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4B13DC762D471C7D00378B82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B13DC752D471C7D00378B82 /* PLAILabIOS.app */,
+				4B13DC852D471C7E00378B82 /* PLAILabIOSTests.xctest */,
+				4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4B13DC742D471C7D00378B82 /* PLAILabIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B13DC992D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOS" */;
+			buildPhases = (
+				4B13DC712D471C7D00378B82 /* Sources */,
+				4B13DC722D471C7D00378B82 /* Frameworks */,
+				4B13DC732D471C7D00378B82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4B13DC772D471C7D00378B82 /* PLAILabIOS */,
+			);
+			name = PLAILabIOS;
+			packageProductDependencies = (
+			);
+			productName = PLAILabIOS;
+			productReference = 4B13DC752D471C7D00378B82 /* PLAILabIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4B13DC842D471C7E00378B82 /* PLAILabIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B13DC9C2D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOSTests" */;
+			buildPhases = (
+				4B13DC812D471C7E00378B82 /* Sources */,
+				4B13DC822D471C7E00378B82 /* Frameworks */,
+				4B13DC832D471C7E00378B82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B13DC872D471C7E00378B82 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4B13DC882D471C7E00378B82 /* PLAILabIOSTests */,
+			);
+			name = PLAILabIOSTests;
+			packageProductDependencies = (
+			);
+			productName = PLAILabIOSTests;
+			productReference = 4B13DC852D471C7E00378B82 /* PLAILabIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4B13DC8E2D471C7E00378B82 /* PLAILabIOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B13DC9F2D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOSUITests" */;
+			buildPhases = (
+				4B13DC8B2D471C7E00378B82 /* Sources */,
+				4B13DC8C2D471C7E00378B82 /* Frameworks */,
+				4B13DC8D2D471C7E00378B82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4B13DC912D471C7E00378B82 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4B13DC922D471C7E00378B82 /* PLAILabIOSUITests */,
+			);
+			name = PLAILabIOSUITests;
+			packageProductDependencies = (
+			);
+			productName = PLAILabIOSUITests;
+			productReference = 4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4B13DC6D2D471C7D00378B82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					4B13DC742D471C7D00378B82 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					4B13DC842D471C7E00378B82 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 4B13DC742D471C7D00378B82;
+					};
+					4B13DC8E2D471C7E00378B82 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = 4B13DC742D471C7D00378B82;
+					};
+				};
+			};
+			buildConfigurationList = 4B13DC702D471C7D00378B82 /* Build configuration list for PBXProject "PLAILabIOS" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4B13DC6C2D471C7D00378B82;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4B13DC762D471C7D00378B82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4B13DC742D471C7D00378B82 /* PLAILabIOS */,
+				4B13DC842D471C7E00378B82 /* PLAILabIOSTests */,
+				4B13DC8E2D471C7E00378B82 /* PLAILabIOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4B13DC732D471C7D00378B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC832D471C7E00378B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC8D2D471C7E00378B82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4B13DC712D471C7D00378B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC812D471C7E00378B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B13DC8B2D471C7E00378B82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4B13DC872D471C7E00378B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B13DC742D471C7D00378B82 /* PLAILabIOS */;
+			targetProxy = 4B13DC862D471C7E00378B82 /* PBXContainerItemProxy */;
+		};
+		4B13DC912D471C7E00378B82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B13DC742D471C7D00378B82 /* PLAILabIOS */;
+			targetProxy = 4B13DC902D471C7E00378B82 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4B13DC972D471C7E00378B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4B13DC982D471C7E00378B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4B13DC9A2D471C7E00378B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to detect hand poses.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4B13DC9B2D471C7E00378B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to detect hand poses.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4B13DC9D2D471C7E00378B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PLAILabIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PLAILabIOS";
+			};
+			name = Debug;
+		};
+		4B13DC9E2D471C7E00378B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PLAILabIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PLAILabIOS";
+			};
+			name = Release;
+		};
+		4B13DCA02D471C7E00378B82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PLAILabIOS;
+			};
+			name = Debug;
+		};
+		4B13DCA12D471C7E00378B82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PLAILabIOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4B13DC702D471C7D00378B82 /* Build configuration list for PBXProject "PLAILabIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B13DC972D471C7E00378B82 /* Debug */,
+				4B13DC982D471C7E00378B82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B13DC992D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B13DC9A2D471C7E00378B82 /* Debug */,
+				4B13DC9B2D471C7E00378B82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B13DC9C2D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B13DC9D2D471C7E00378B82 /* Debug */,
+				4B13DC9E2D471C7E00378B82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B13DC9F2D471C7E00378B82 /* Build configuration list for PBXNativeTarget "PLAILabIOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B13DCA02D471C7E00378B82 /* Debug */,
+				4B13DCA12D471C7E00378B82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4B13DC6D2D471C7D00378B82 /* Project object */;
+}

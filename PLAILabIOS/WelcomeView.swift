@@ -51,8 +51,11 @@ struct WelcomeView: View {
                 }
             }
         }
-        .fullScreenCover(isPresented: $showBodyCamera) {
+        .fullScreenCover(isPresented: $showHandCamera) {
             HandPoseDetectionView()
+        }
+        .fullScreenCover( isPresented: $showBodyCamera){
+            BodyPoseDetectionView()
         }
     }
 }

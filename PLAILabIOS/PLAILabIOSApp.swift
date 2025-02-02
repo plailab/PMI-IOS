@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-@main
+@main // SAYS WHICH FILE TO START ON 
 struct PLAILabIOSApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+            WelcomeView()
         }
     }
 }

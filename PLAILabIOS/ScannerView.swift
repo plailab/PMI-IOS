@@ -34,7 +34,6 @@ struct ScannerView: UIViewControllerRepresentable {
         
         // Store the preview layer in the coordinator
         context.coordinator.previewLayer = previewLayer
-        
         Task {
             captureSession.startRunning()
         }

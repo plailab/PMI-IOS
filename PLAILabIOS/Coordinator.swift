@@ -1,6 +1,7 @@
 // Coordinator.swift
 import AVFoundation
 import Vision
+import UIKit
 
 class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     var parent: ScannerView
@@ -68,9 +69,11 @@ class Coordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
+    // Convert Vision's normalized coordinates to screen coordinates
     func convertVisionPoint(_ point: CGPoint, previewLayer: AVCaptureVideoPreviewLayer) -> CGPoint {
-        // Convert normalized point from Vision (0,0 to 1,1) to AVCaptureVideoPreviewLayer coordinates
-        let pointInLayer = previewLayer.layerPointConverted(fromCaptureDevicePoint: point)
-        return pointInLayer
+        let screenSize = UIScreen.main.bounds.size
+        let y = point.x * screenSize.height
+        let x = point.y * screenSize.width
+        return CGPoint(x: x, y: y)
     }
 }

@@ -38,14 +38,14 @@ class BodyCoordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                         
                 ]
                 
-                for joint in bodyJoints {
-                    let recognizedPoint = observation.recognizedPoint(joint)
-//                    if let recognizedPoint = try? observation.recognizedPoint(joint),
-//                       recognizedPoint.confidence > 0.5 {
-                    points.append(recognizedPoint.localPosition)
-                    //}
-                }
-                
+//                for joint in bodyJoints {
+//                    let recognizedPoint = observation.recognizedPoint(joint)
+////                    if let recognizedPoint = try? observation.recognizedPoint(joint),
+////                       recognizedPoint.confidence > 0.5 {
+//                    points.append(recognizedPoint.localPosition)
+//                    //}
+//                }
+//                
                 DispatchQueue.main.async {
                     // Only convert points if we have a valid preview layer
                     if let previewLayer = self.previewLayer {
@@ -56,7 +56,7 @@ class BodyCoordinator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
         }
         
-        request.maximumHandCount = 1
+//        request.maximumHandCount = 1
         
         let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
         do {

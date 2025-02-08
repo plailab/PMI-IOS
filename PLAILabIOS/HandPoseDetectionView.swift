@@ -18,9 +18,9 @@ struct HandPoseDetectionView: View {
             // Draw circles for the hand points
             HandPointsView(handPoints: handPoints)
             
-            VStack {
+            VStack { // vertical stack
                 // Back button at the top
-                HStack {
+                HStack { // horizontal stack
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {

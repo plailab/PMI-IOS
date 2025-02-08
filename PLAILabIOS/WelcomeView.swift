@@ -59,3 +59,7 @@ struct WelcomeView: View {
         }
     }
 }
+
+#Preview {
+    WelcomeView()
+}

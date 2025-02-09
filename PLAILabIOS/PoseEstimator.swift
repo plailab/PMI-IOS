@@ -5,7 +5,7 @@ import Combine
 
 class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
     let sequenceHandler = VNSequenceRequestHandler()
-    @Published var bodyParts = [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]()
+    @Published var bodyParts = [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]() // THIS IS WHERE WE WILL BE ABLE TO DETECT EACH VARIABLE
     var wasInBottomPosition = false
     @Published var squatCount = 0
     @Published var isGoodPosture = true
@@ -39,6 +39,8 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
             self.bodyParts = bodyParts
         }
     }
+    
+    // THIS LOOKS LIKE A GOOD START FOR MAKING EXERCISES
     
     func countSquats(bodyParts: [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]) {
         

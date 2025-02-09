@@ -6,11 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		4B52F5702D590B2300A054ED /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F56F2D590B2300A054ED /* Shapes.swift */; };
-		4B52F5722D590B8800A054ED /* CGPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B52F5712D590B8800A054ED /* CGPointExtension.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		4B13DC862D471C7E00378B82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -32,8 +27,6 @@
 		4B13DC752D471C7D00378B82 /* PLAILabIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLAILabIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B13DC852D471C7E00378B82 /* PLAILabIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAILabIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAILabIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B52F56F2D590B2300A054ED /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
-		4B52F5712D590B8800A054ED /* CGPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -82,8 +75,6 @@
 		4B13DC6C2D471C7D00378B82 = {
 			isa = PBXGroup;
 			children = (
-				4B52F5712D590B8800A054ED /* CGPointExtension.swift */,
-				4B52F56F2D590B2300A054ED /* Shapes.swift */,
 				4B13DC772D471C7D00378B82 /* PLAILabIOS */,
 				4B13DC882D471C7E00378B82 /* PLAILabIOSTests */,
 				4B13DC922D471C7E00378B82 /* PLAILabIOSUITests */,
@@ -245,8 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B52F5722D590B8800A054ED /* CGPointExtension.swift in Sources */,
-				4B52F5702D590B2300A054ED /* Shapes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

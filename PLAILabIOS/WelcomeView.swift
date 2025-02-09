@@ -60,7 +60,7 @@ struct WelcomeView: View {
             HandPoseDetectionView()
         }
         .fullScreenCover( isPresented: $showBodyCamera){
-            //BodyPoseDetectionView()
+            BodyPoseDetectionView()
         }
     }
 }

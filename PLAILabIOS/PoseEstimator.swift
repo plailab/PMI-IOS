@@ -3,7 +3,10 @@ import AVFoundation
 import Vision
 import Combine
 
+// delegate just takes frames from the AVCaptureDevice
 class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
+    // let can't change
+    // but var can :)
     let sequenceHandler = VNSequenceRequestHandler()
     @Published var bodyParts = [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]() // THIS IS WHERE WE WILL BE ABLE TO DETECT EACH VARIABLE
     var wasInBottomPosition = false

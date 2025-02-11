@@ -4,6 +4,7 @@ import AVFoundation
 import Vision
 
 
+// WRAPS CAMERA VIEW CONTROLLER
 struct CameraViewWrapper: UIViewControllerRepresentable {
     var poseEstimator: PoseEstimator
     func makeUIViewController(context: Context) -> some UIViewController {

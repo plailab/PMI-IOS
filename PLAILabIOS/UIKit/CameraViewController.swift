@@ -18,12 +18,12 @@ final class CameraViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         do {
-            if cameraSession == nil {
+            if cameraSession == nil { // if camera hasn't been started yet
                 try prepareAVSession()
                 cameraView.previewLayer.session = cameraSession
                 cameraView.previewLayer.videoGravity = .resizeAspectFill
             }
-            cameraSession?.startRunning()
+            cameraSession?.startRunning() // if it exists, start running 
         } catch {
             print(error.localizedDescription)
         }
@@ -40,7 +40,7 @@ final class CameraViewController: UIViewController {
         guard let videoDevice = AVCaptureDevice.default(
                 .builtInWideAngleCamera,
                 for: .video,
-                position: .front)
+                position: .front) // WHICH CAMERA DEVICE WE WANT TO USE
         else { return }
         
         guard let deviceInput = try? AVCaptureDeviceInput(device: videoDevice)
@@ -51,6 +51,7 @@ final class CameraViewController: UIViewController {
         
         session.addInput(deviceInput)
         
+        // OUTPUTS THE IMAGES IF THERE ARE ANY
         let dataOutput = AVCaptureVideoDataOutput()
         if session.canAddOutput(dataOutput) {
             session.addOutput(dataOutput)

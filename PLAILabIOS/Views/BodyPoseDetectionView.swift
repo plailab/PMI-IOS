@@ -11,7 +11,7 @@ struct BodyPoseDetectionView: View {
                               Button(action: {
                                   presentationMode.wrappedValue.dismiss()
                               }) {
-                                  Image(systemName: "xmark.circle.fill")
+                                  Image(systemName: "xmark.circle.fill") // EXIT THE SCREEN
                                       .font(.title)
                                       .foregroundColor(.white)
                                       .padding(.top, 20)

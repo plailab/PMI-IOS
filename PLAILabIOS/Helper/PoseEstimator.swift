@@ -9,9 +9,14 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
     // but var can :)
     let sequenceHandler = VNSequenceRequestHandler()
     @Published var bodyParts = [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]() // THIS IS WHERE WE WILL BE ABLE TO DETECT EACH VARIABLE
-    var wasInBottomPosition = false
+    var wasInBottomPositionSquat = false
     @Published var squatCount = 0
     @Published var isGoodPosture = true
+    
+    // Messing around with a shoulder raise
+    @Published var shoulderRaiseCount = 0
+    @Published var wasInBottomPositionShoulderRaise = false
+    @Published var isGoodShoulderRaisePosture = true // this should probably be done using the angle of their elbows
     
     var subscriptions = Set<AnyCancellable>()
     
@@ -43,6 +48,28 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
         }
     }
     
+    func countShoulderRaises(bodyParts: [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]) {
+        let leftElbow = bodyParts[.leftElbow]!.location
+        let rightElbow = bodyParts[.rightElbow]!.location
+        let rightShoulder = bodyParts[.rightShoulder]!.location
+        let leftShoulder = bodyParts[.leftShoulder]!.location
+        let leftWrist = bodyParts[.leftWrist]!.location
+        let rightWrist = bodyParts[.rightWrist]!.location
+        
+        // FOR GOOD FORM
+        // The elbow will be the origin and the shoulder will be vector 1 and the wrist will be vector too.
+        // It doesn't matter if the elbow moves/origin moves because the other vectors will move proportionately with it
+        
+        if leftWrist.y < leftShoulder.y && rightWrist.y < rightShoulder.y {
+            self.wasInBottomPositionShoulderRaise = true
+        }
+        if self.wasInBottomPositionShoulderRaise && leftWrist.y > leftElbow.y && leftElbow.y > leftShoulder.y && rightWrist.y > rightElbow.y && rightElbow.y > rightShoulder.y {
+            self.shoulderRaiseCount += 1
+            self.wasInBottomPositionShoulderRaise = false
+        }
+        // To track if
+    }
+    
     // THIS LOOKS LIKE A GOOD START FOR MAKING EXERCISES
     
     func countSquats(bodyParts: [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]) {
@@ -60,15 +87,15 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
                     angleDiffRadians += CGFloat(2 * Double.pi)
                 }
         let angleDiffDegrees = Int(angleDiffRadians * 180 / .pi)
-        if angleDiffDegrees > 150 && self.wasInBottomPosition {
+        if angleDiffDegrees > 150 && self.wasInBottomPositionSquat {
             self.squatCount += 1
-            self.wasInBottomPosition = false
+            self.wasInBottomPositionSquat = false
         }
         
         let hipHeight = rightHip.y
         let kneeHeight = rightKnee.y
         if hipHeight < kneeHeight {
-            self.wasInBottomPosition = true
+            self.wasInBottomPositionSquat = true
         }
         
 

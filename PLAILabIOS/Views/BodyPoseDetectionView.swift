@@ -34,6 +34,13 @@ struct BodyPoseDetectionView: View {
                     .font(.largeTitle)
                     .foregroundColor(Color.red)
                     .opacity(poseEstimator.isGoodPosture ? 0.0 : 1.0)
+            }
+            HStack{
+                Text("Shoulder Raise Counter:")
+                    .font(.title)
+                Text(String(poseEstimator.shoulderRaiseCount))
+                    .font(.title)
+            
             }.padding(.bottom, 50)
         }
     }

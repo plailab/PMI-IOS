@@ -40,7 +40,7 @@ final class CameraViewController: UIViewController {
         guard let videoDevice = AVCaptureDevice.default(
                 .builtInWideAngleCamera,
                 for: .video,
-                position: .back) // WHICH CAMERA DEVICE WE WANT TO USE
+                position: .front) // WHICH CAMERA DEVICE WE WANT TO USE
         else { return }
         
         guard let deviceInput = try? AVCaptureDeviceInput(device: videoDevice)

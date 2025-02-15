@@ -24,7 +24,7 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
         super.init()
         $bodyParts
             .dropFirst()
-            .sink(receiveValue: { bodyParts in self.countSquats(bodyParts: bodyParts)})
+            .sink(receiveValue: { bodyParts in self.countShoulderRaises(bodyParts: bodyParts)})
             .store(in: &subscriptions)
     }
     

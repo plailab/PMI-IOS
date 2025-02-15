@@ -2,9 +2,12 @@ import SwiftUI
 
 struct BodyPoseDetectionView: View {
     
+    let exercise: String // taken from Welcome View Selection
+    
     @StateObject var poseEstimator = PoseEstimator()
     @Environment(\.presentationMode) var presentationMode
 
+    
     var body: some View {
         VStack {
             HStack { // horizontal stack
@@ -26,21 +29,18 @@ struct BodyPoseDetectionView: View {
             }.frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * 1920 / 1080, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
            
             HStack {
-                Text("Squat counter:")
+                Text("\(exercise) counter:")
                     .font(.title)
-                Text(String(poseEstimator.squatCount))
+                Text(String(poseEstimator.shoulderRaiseCount)) // This needs to be changed to be dependent on the exercise
+                // maybe i should have a struct so that if they choose the shoulder raise variable, there is a thing for the count and that stuff automatically
                     .font(.title)
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(Color.red)
-                    .opacity(poseEstimator.isGoodPosture ? 0.0 : 1.0)
-            }
-            HStack{
-                Text("Shoulder Raise Counter:")
-                    .font(.title)
-                Text(String(poseEstimator.shoulderRaiseCount))
-                    .font(.title)
-            
+                
+                // NOTE: In the future, make a mark for good form
+//                Image(systemName: "exclamationmark.triangle.fill")
+//                    .font(.largeTitle)
+//                    .foregroundColor(Color.red)
+//                    .opacity(poseEstimator.isGoodPosture ? 0.0 : 1.0)
+          
             }.padding(.bottom, 50)
         }
     }

@@ -4,23 +4,20 @@ struct BodyPoseDetectionView: View {
     
     let exercise: String // taken from Welcome View Selection
     
-    @StateObject var poseEstimator = PoseEstimator()
     @Environment(\.presentationMode) var presentationMode
-
+    @StateObject private var poseEstimator: PoseEstimator
+    
+    // Seems like the constructor
+    // Makes sure that the passed in parameter gets assigned to this class
+    init(exercise: String) {
+            self.exercise = exercise
+            // Create the StateObject after self.exercise is initialized
+            self._poseEstimator = StateObject(wrappedValue: PoseEstimator(selectedExercise: exercise))
+    }
+        
     
     var body: some View {
         VStack {
-            HStack { // horizontal stack
-                              Button(action: {
-                                  presentationMode.wrappedValue.dismiss()
-                              }) {
-                                  Image(systemName: "xmark.circle.fill") // EXIT THE SCREEN
-                                      .font(.title)
-                                      .foregroundColor(.white)
-                                      .padding(.top, 20)
-                              }
-
-            }.padding([.top, .leading], 20) // leading is left side, trailing is right side
             ZStack {
                 GeometryReader { geo in
                     CameraViewWrapper(poseEstimator: poseEstimator)
@@ -31,7 +28,7 @@ struct BodyPoseDetectionView: View {
             HStack {
                 Text("\(exercise) counter:")
                     .font(.title)
-                Text(String(poseEstimator.shoulderRaiseCount)) // This needs to be changed to be dependent on the exercise
+                Text(String(poseEstimator.exerciseCount)) // This needs to be changed to be dependent on the exercise
                 // maybe i should have a struct so that if they choose the shoulder raise variable, there is a thing for the count and that stuff automatically
                     .font(.title)
                 

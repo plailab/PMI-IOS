@@ -2,7 +2,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
-    let exercises = ["Shoulder Raises", "Knee Extensions (No)", "Raise Them Knees (No)", "Ankle Circles (No)"]
+    let exercises = ["Shoulder Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
     
     var body: some View {
         NavigationView {

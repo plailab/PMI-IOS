@@ -29,19 +29,6 @@ struct StickFigureView: View {
                                poseEstimator.bodyParts[.neck]!.location,  poseEstimator.bodyParts[.nose]!.location], size: size)
                 .stroke(lineWidth: 5.0)
                 .fill(Color.green)
-                
-                AsyncImage(url: URL(string: "https://banner2.cleanpng.com/20180326/ite/avj0l15w0.webp")) { imagePhase in
-                    switch imagePhase {
-                    case .success(let image):
-                        image
-                            .resizable()  // Apply resizable modifier here
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                    default:
-                        EmptyView()
-                    }
-                }
-                .position(inversePoint(poseEstimator.bodyParts[.leftWrist]!.location, in: size))
             }
         }
     }

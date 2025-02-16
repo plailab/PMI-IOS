@@ -8,14 +8,14 @@ struct StickFigureView: View {
             ZStack {
                 // Right leg
                 Stick(points: [poseEstimator.bodyParts[.rightAnkle]!.location, poseEstimator.bodyParts[.rightKnee]!.location, poseEstimator.bodyParts[.rightHip]!.location,
-                poseEstimator.bodyParts[.root]!.location], size: size)
-                    .stroke(lineWidth: 5.0)
-                    .fill(Color.green)
+                               poseEstimator.bodyParts[.root]!.location], size: size)
+                .stroke(lineWidth: 5.0)
+                .fill(Color.green)
                 // Left leg
                 Stick(points: [poseEstimator.bodyParts[.leftAnkle]!.location, poseEstimator.bodyParts[.leftKnee]!.location, poseEstimator.bodyParts[.leftHip]!.location,
                                poseEstimator.bodyParts[.root]!.location], size: size)
-                    .stroke(lineWidth: 5.0)
-                    .fill(Color.green)
+                .stroke(lineWidth: 5.0)
+                .fill(Color.green)
                 // Right arm
                 Stick(points: [poseEstimator.bodyParts[.rightWrist]!.location, poseEstimator.bodyParts[.rightElbow]!.location, poseEstimator.bodyParts[.rightShoulder]!.location, poseEstimator.bodyParts[.neck]!.location], size: size)
                     .stroke(lineWidth: 5.0)
@@ -27,11 +27,22 @@ struct StickFigureView: View {
                 // Root to nose
                 Stick(points: [poseEstimator.bodyParts[.root]!.location,
                                poseEstimator.bodyParts[.neck]!.location,  poseEstimator.bodyParts[.nose]!.location], size: size)
-                    .stroke(lineWidth: 5.0)
-                    .fill(Color.green)
-
+                .stroke(lineWidth: 5.0)
+                .fill(Color.green)
+                
+                AsyncImage(url: URL(string: "https://banner2.cleanpng.com/20180326/ite/avj0l15w0.webp")) { imagePhase in
+                    switch imagePhase {
+                    case .success(let image):
+                        image
+                            .resizable()  // Apply resizable modifier here
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                    default:
+                        EmptyView()
+                    }
                 }
+                .position(inversePoint(poseEstimator.bodyParts[.leftWrist]!.location, in: size))
             }
         }
+    }
 }
-

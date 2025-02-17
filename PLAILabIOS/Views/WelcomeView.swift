@@ -1,8 +1,11 @@
 import SwiftUI
+import AVFoundation
 
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
+    @State private var name : String = ""
     let exercises = ["Shoulder Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
+    let synthesizer = AVSpeechSynthesizer();
     
     var body: some View {
         NavigationView {
@@ -18,6 +21,17 @@ struct WelcomeView: View {
                         Text("Tap to start playing!")
                             .font(.title2)
                             .foregroundColor(.gray)
+                        
+                        TextField("Name", text: $name)
+                            .padding()
+                        
+                        
+                        Button("Greet"){
+                            let utterance = AVSpeechUtterance(string: "Hello \(name)!")
+                            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                            AVSpeechSynthesizer().speak(utterance)
+                        }
+                        
                         
                         Picker("Select an exercise", selection: $selection) {
                             ForEach(exercises, id: \.self) {

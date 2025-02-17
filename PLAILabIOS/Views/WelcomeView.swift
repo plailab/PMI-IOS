@@ -39,8 +39,19 @@ struct WelcomeView: View {
                             }
                         }
                         .pickerStyle(.menu)
+//                        
+//                        NavigationLink(destination: BodyPoseDetectionView(exercise:selection)) {
+//                            Text("Start Detection")
+//                                .font(.headline)
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .frame(width: 200)
+//                                .background(Color.blue)
+//                                .cornerRadius(10)
+//                        }
                         
-                        NavigationLink(destination: BodyPoseDetectionView(exercise:selection)) {
+                        
+                        NavigationLink(destination: CalibrationView(exercise:selection)) {
                             Text("Start Detection")
                                 .font(.headline)
                                 .foregroundColor(.white)

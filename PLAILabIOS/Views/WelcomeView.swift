@@ -50,9 +50,9 @@ struct WelcomeView: View {
 //                                .cornerRadius(10)
 //                        }
                         
-                        
-                        NavigationLink(destination: //CalibrationView
-                                       BodyPoseDetectionView(exercise:selection)) {
+                        //BodyPoseDetectionView
+                        NavigationLink(destination:
+                                      CalibrationView(exercise:selection)) {
                             Text("Start Detection")
                                 .font(.headline)
                                 .foregroundColor(.white)

@@ -5,6 +5,8 @@ struct CalibrationView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var poseEstimator: PoseEstimator
     
+    private var exercise: String
+    
     @State private var currentStep = 0
     @State private var isRecording = false
     @State private var calibrationComplete = false
@@ -25,6 +27,7 @@ struct CalibrationView: View {
     
     init(exercise: String) {
         self._poseEstimator = StateObject(wrappedValue: PoseEstimator(selectedExercise: exercise))
+        self.exercise = exercise
     }
     
     var body: some View {
@@ -86,20 +89,23 @@ struct CalibrationView: View {
                 }
             }
         }
-        .onReceive(poseEstimator.$bodyParts) { bodyParts in
-            if isRecording {
-                updateMeasurements(from: bodyParts)
-            }
-        }
-        .alert(isPresented: $calibrationComplete) {
-            Alert(
-                title: Text("Calibration Complete"),
-                message: Text("Range of motion recorded:\nMax arm height: \(String(format: "%.2f", maxArmPosition))\nMin squat height: \(String(format: "%.2f", minSquatPosition))"),
-                dismissButton: .default(Text("Continue")) {
-                    presentationMode.wrappedValue.dismiss()
+    
+            
+            .onReceive(poseEstimator.$bodyParts) { bodyParts in
+                if isRecording {
+                    updateMeasurements(from: bodyParts)
                 }
-            )
-        }
+            }
+            
+            
+            NavigationLink(destination: BodyPoseDetectionView(
+                exercise: self.exercise,
+                maxArmPosition: self.maxArmPosition,
+                maxSquatPosition: self.minSquatPosition
+            ), isActive: $calibrationComplete) {
+                EmptyView()
+            }
+        
     }
     
     private func startRecording() {
@@ -112,7 +118,7 @@ struct CalibrationView: View {
         case 1: // Arm raise
             if let rightWrist = bodyParts[.rightWrist]?.location,
                let leftWrist = bodyParts[.leftWrist]?.location {
-                let maxHeight = max(rightWrist.y, leftWrist.y)
+                let maxHeight = max(rightWrist.y, leftWrist.y) // maximum height of the one of the arms
                 maxArmPosition = max(maxArmPosition, maxHeight)
             }
             
@@ -120,7 +126,7 @@ struct CalibrationView: View {
             if let rightHip = bodyParts[.rightHip]?.location,
                let leftHip = bodyParts[.leftHip]?.location {
                 let hipHeight = min(rightHip.y, leftHip.y)
-                minSquatPosition = min(minSquatPosition, hipHeight)
+                minSquatPosition = min(minSquatPosition, hipHeight) // minimum height for the persons hip
             }
             
         default:

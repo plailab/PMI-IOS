@@ -51,7 +51,8 @@ struct WelcomeView: View {
 //                        }
                         
                         
-                        NavigationLink(destination: CalibrationView(exercise:selection)) {
+                        NavigationLink(destination: //CalibrationView
+                                       BodyPoseDetectionView(exercise:selection)) {
                             Text("Start Detection")
                                 .font(.headline)
                                 .foregroundColor(.white)

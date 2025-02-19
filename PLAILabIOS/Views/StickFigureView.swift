@@ -22,6 +22,8 @@ struct StickFigureView: View {
                 // Bottom left os screen is (1,0)
                 // Right leg
                 
+                // If it doesn't see a body part, it assumes that the point is (0,1) (being at the top right of the screen)
+                
                 Text(String(format: "(%.2f, %.2f, %.2f, %.2f, %.2f, %.2f)",
                             poseEstimator.bodyParts[.rightAnkle]?.x ?? 0,
                             poseEstimator.bodyParts[.rightAnkle]?.y ?? 0,
@@ -36,9 +38,9 @@ struct StickFigureView: View {
                 
                 
                 // Right leg
-                if (poseEstimator.bodyParts[.rightAnkle]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightAnkle]?.y ?? 0) != 0
-                && (poseEstimator.bodyParts[.rightKnee]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightKnee]?.y ?? 0) != 0
-                && (poseEstimator.bodyParts[.rightHip]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightHip]?.y ?? 0) != 0
+                if (poseEstimator.bodyParts[.rightAnkle]?.x ?? 0 ) != 0
+                && (poseEstimator.bodyParts[.rightKnee]?.x ?? 0 )  != 0
+                && (poseEstimator.bodyParts[.rightHip]?.x ?? 0 )  != 0
                 {
                     Stick(points: [poseEstimator.bodyParts[.rightAnkle]!.location, poseEstimator.bodyParts[.rightKnee]!.location, poseEstimator.bodyParts[.rightHip]!.location,
                     poseEstimator.bodyParts[.root]!.location], size: size)
@@ -48,9 +50,9 @@ struct StickFigureView: View {
                 }
                 
                 // Left leg
-                if (poseEstimator.bodyParts[.leftAnkle]?.x ?? 0 ) + (poseEstimator.bodyParts[.leftAnkle]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.leftHip]?.x ?? 0 ) + (poseEstimator.bodyParts[.leftHip]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.rightKnee]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightKnee]?.y ?? 0) != 0
+                if (poseEstimator.bodyParts[.leftAnkle]?.x ?? 0 )  != 0
+                    && (poseEstimator.bodyParts[.leftHip]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.rightKnee]?.x ?? 0 ) != 0
 
                 {
                     Stick(points: [poseEstimator.bodyParts[.leftAnkle]!.location, poseEstimator.bodyParts[.leftKnee]!.location, poseEstimator.bodyParts[.leftHip]!.location,
@@ -60,9 +62,9 @@ struct StickFigureView: View {
                 }
          
                 // Right arm
-                if (poseEstimator.bodyParts[.rightWrist]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightWrist]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.rightElbow]?.x ?? 0 ) + (poseEstimator.bodyParts[.rightElbow]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) + (poseEstimator.bodyParts[.neck]?.y ?? 0) != 0
+                if (poseEstimator.bodyParts[.rightWrist]?.x ?? 0 )  != 0
+                    && (poseEstimator.bodyParts[.rightElbow]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 )  != 0
                 {
                     Stick(points: [poseEstimator.bodyParts[.rightWrist]!.location, poseEstimator.bodyParts[.rightElbow]!.location, poseEstimator.bodyParts[.rightShoulder]!.location, poseEstimator.bodyParts[.neck]!.location], size: size)
                         .stroke(lineWidth: 5.0)
@@ -70,9 +72,9 @@ struct StickFigureView: View {
                 }
               
                 // Left arm
-                if (poseEstimator.bodyParts[.leftWrist]?.x ?? 0 ) + (poseEstimator.bodyParts[.leftWrist]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.leftElbow]?.x ?? 0 ) + (poseEstimator.bodyParts[.leftElbow]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) + (poseEstimator.bodyParts[.neck]?.y ?? 0) != 0
+                if (poseEstimator.bodyParts[.leftWrist]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.leftElbow]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) != 0
                 {
                     Stick(points: [poseEstimator.bodyParts[.leftWrist]!.location, poseEstimator.bodyParts[.leftElbow]!.location, poseEstimator.bodyParts[.leftShoulder]!.location, poseEstimator.bodyParts[.neck]!.location], size: size)
                         .stroke(lineWidth: 5.0)
@@ -80,9 +82,9 @@ struct StickFigureView: View {
                 }
                 
                 // Root to nose
-                if (poseEstimator.bodyParts[.root]?.x ?? 0 ) + (poseEstimator.bodyParts[.root]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) + (poseEstimator.bodyParts[.neck]?.y ?? 0) != 0
-                    && (poseEstimator.bodyParts[.nose]?.x ?? 0 ) + (poseEstimator.bodyParts[.nose]?.y ?? 0) != 0
+                if (poseEstimator.bodyParts[.root]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) != 0
+                    && (poseEstimator.bodyParts[.nose]?.x ?? 0 ) != 0
                 {
                     
                     Stick(points: [poseEstimator.bodyParts[.root]!.location,

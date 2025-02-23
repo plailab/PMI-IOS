@@ -3,7 +3,11 @@ import Vision
 
 // When someone does calibration, they have to have a set position. This means that they would need a way to tell the app to start recording when doing the calibration because they won't be able to press a button on the phone.
 
+// all the calibration should be in the start for each category, sitting, standing, bed
+
+
 // https://developer.apple.com/tutorials/app-dev-training/transcribing-speech-to-text looks like a good tutorial
+
 struct CalibrationView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var poseEstimator: PoseEstimator

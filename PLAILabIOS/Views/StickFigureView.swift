@@ -21,7 +21,7 @@ struct StickFigureView: View {
                 // Bottom right of screen is (0,0)
                 // Bottom left os screen is (1,0)
                 // Right leg
-                
+
                 // If it doesn't see a body part, it assumes that the point is (0,1) (being at the top right of the screen)
                 
                 Text(String(format: "(%.2f, %.2f, %.2f, %.2f, %.2f, %.2f)",
@@ -60,7 +60,7 @@ struct StickFigureView: View {
                         .stroke(lineWidth: 5.0)
                         .fill(Color.green)
                 }
-         
+
                 // Right arm
                 if (poseEstimator.bodyParts[.rightWrist]?.x ?? 0 )  != 0
                     && (poseEstimator.bodyParts[.rightElbow]?.x ?? 0 ) != 0
@@ -82,6 +82,7 @@ struct StickFigureView: View {
                 }
                 
                 // Root to nose
+
                 if (poseEstimator.bodyParts[.root]?.x ?? 0 ) != 0
                     && (poseEstimator.bodyParts[.neck]?.x ?? 0 ) != 0
                     && (poseEstimator.bodyParts[.nose]?.x ?? 0 ) != 0
@@ -97,5 +98,5 @@ struct StickFigureView: View {
                 }
             }
         }
+    }
 }
-

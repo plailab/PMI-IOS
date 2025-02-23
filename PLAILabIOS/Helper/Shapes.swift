@@ -17,4 +17,8 @@ struct Stick: Shape { // lets Stick be drawable
 }
 
 
-
+func inversePoint(_ point: CGPoint, in size: CGSize) -> CGPoint {
+    return point
+        .applying(CGAffineTransform.identity.scaledBy(x: size.width, y: size.height))
+        .applying(CGAffineTransform(scaleX: -1, y: -1).translatedBy(x: -size.width, y: -size.height))
+}

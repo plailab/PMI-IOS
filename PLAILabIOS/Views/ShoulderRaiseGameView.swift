@@ -13,6 +13,7 @@ struct ShoulderRaiseGameView: View {
     
     let touchingOffset: CGFloat = 30.0
     let dotOffsetY: CGFloat = 200.0
+    // dotOffsetX is a state var so that it does not flick around during the view (memorized)
     @State var dotOffsetX = CGFloat.random(in: -50...50)
     
     var body: some View {

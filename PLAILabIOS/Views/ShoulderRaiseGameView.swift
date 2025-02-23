@@ -79,6 +79,7 @@ struct ShoulderRaiseGameView: View {
 
                             showDotTop = true // Start at the top
                         }
+                        // TODO: make the offsets proportional to body to resolve depth issue. Idea: for x offset for bottom position, take the distance of forarm. For top, just the sum of the length of the whole arm (maybe times 0.8)
 
                         if showDotTop {
                             // Check if both wrists are close enough to their respective "top" positions

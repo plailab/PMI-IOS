@@ -16,15 +16,10 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
     @Published var exerciseCount = 0
     @Published var wasInBottomPosition = false
     
-    @Published var maxArmPosition: CGFloat = 0
-    @Published var maxSquatPosition: CGFloat = 0
     
-    
-    
-    init(selectedExercise: String, maxArmPosition: CGFloat, maxSquatPosition: CGFloat) {
+    init(selectedExercise: String) {
         self.currentExercise = selectedExercise
-        self.maxArmPosition = maxArmPosition
-        self.maxSquatPosition = maxSquatPosition
+        
         super.init()
         $bodyParts
             .dropFirst()

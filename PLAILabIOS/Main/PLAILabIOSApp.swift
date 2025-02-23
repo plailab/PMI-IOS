@@ -11,7 +11,6 @@ import SwiftUI
 struct PLAILabIOSApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView()
             WelcomeView()
         }
     }

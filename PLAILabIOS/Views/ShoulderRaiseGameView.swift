@@ -5,10 +5,8 @@ struct ShoulderRaiseGameView: View {
     var size: CGSize
     @State private var frameIndex = 1
     let frameCount = 3 // number of pacman figures to animate, currently 3
-    @State private var dotAboveShoulderLeft = CGPoint(x: 0, y: 0)
-    @State private var dotAboveShoulderRight = CGPoint(x: 0, y: 0)
-    @State private var dotBelowShoulderLeft = CGPoint(x: 0, y: 0)
-    @State private var dotBelowShoulderRight = CGPoint(x: 0, y: 0)
+    @State private var dotPositionLeft = CGPoint(x: 0, y: 0)
+    @State private var dotPositionRight = CGPoint(x: 0, y: 0)
     @State private var showDotTop = true // start at top by default
     
     let touchingOffset: CGFloat = 30.0
@@ -19,29 +17,16 @@ struct ShoulderRaiseGameView: View {
     var body: some View {
         if poseEstimator.bodyParts.isEmpty == false {
             ZStack {
-                if showDotTop {
-                    Image("dot")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .position(dotAboveShoulderLeft)
-                    Image("dot")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .position(dotAboveShoulderRight)
-                } else {
-                    Image("dot")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .position(dotBelowShoulderLeft)
-                    Image("dot")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .position(dotBelowShoulderRight)
-                }
+                Image("dot")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .position(dotPositionLeft)
+                Image("dot")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .position(dotPositionRight)
                 
                 Image("pacman\(frameIndex)") // Switch images based on the condition
                     .resizable()
@@ -85,27 +70,42 @@ struct ShoulderRaiseGameView: View {
                         let inverseLeftWrist = inversePoint(leftWrist, in: size)
                         let inverseRightWrist = inversePoint(rightWrist, in: size)
                         
-                        // If showDotTop is true, update positions for top
-                        if showDotTop {
-                            dotAboveShoulderLeft = inverseLeftShoulder - CGPoint(x: dotOffsetX, y: dotOffsetY)
-                            dotAboveShoulderRight = inverseRightShoulder - CGPoint(x: dotOffsetX, y: dotOffsetY)
+                        // Check if the dots are initially (0,0) and set them to the top position
+                        if dotPositionLeft == .zero && dotPositionRight == .zero {
                             
+                            // initial position
+                            dotPositionLeft = inverseLeftShoulder - CGPoint(x: 0, y: dotOffsetY)
+                            dotPositionRight = inverseRightShoulder - CGPoint(x: 0, y: dotOffsetY)
+
+                            showDotTop = true // Start at the top
+                        }
+
+                        if showDotTop {
                             // Check if both wrists are close enough to their respective "top" positions
-                            if dotAboveShoulderLeft.distance(to: inverseLeftWrist) <= touchingOffset && dotAboveShoulderRight.distance(to: inverseRightWrist) <= touchingOffset {
+                            if dotPositionLeft.distance(to: inverseLeftWrist) <= touchingOffset &&
+                               dotPositionRight.distance(to: inverseRightWrist) <= touchingOffset {
+                                
                                 showDotTop.toggle()
                                 dotOffsetX = CGFloat.random(in: -50...50)
+                                
+                                // Move dots to the bottom position
+                                dotPositionLeft = inverseLeftShoulder + CGPoint(x: dotOffsetX, y: 0)
+                                dotPositionRight = inverseRightShoulder + CGPoint(x: dotOffsetX, y: 0)
                             }
                         } else {
-                            // If showDotTop is false, update positions for bottom
-                            dotBelowShoulderLeft = inverseLeftShoulder + CGPoint(x: dotOffsetX, y: dotOffsetY)
-                            dotBelowShoulderRight = inverseRightShoulder + CGPoint(x: dotOffsetX, y: dotOffsetY)
-
                             // Check if both wrists are touching their respective "bottom" positions
-                            if dotBelowShoulderLeft.distance(to: inverseLeftWrist) <= touchingOffset && dotBelowShoulderRight.distance(to: inverseRightWrist) <= touchingOffset {
+                            if dotPositionLeft.distance(to: inverseLeftWrist) <= touchingOffset &&
+                               dotPositionRight.distance(to: inverseRightWrist) <= touchingOffset {
+                                
                                 showDotTop.toggle()
                                 dotOffsetX = CGFloat.random(in: -50...50)
+
+                                // Move dots to the top position
+                                dotPositionLeft = inverseLeftShoulder - CGPoint(x: dotOffsetX, y: dotOffsetY)
+                                dotPositionRight = inverseRightShoulder - CGPoint(x: dotOffsetX, y: dotOffsetY)
                             }
                         }
+
                     }
                 }
 

@@ -19,7 +19,7 @@ struct BodyPoseDetectionView: View {
         // Create the StateObject after self.exercise is initialized
         
         // NEED TO PASS IN THE VALUES TO THE POSEESTIMATOR SO IT CAN ACTUALLY USE IT FOR EXERCISES
-        self._poseEstimator = StateObject(wrappedValue: PoseEstimator(selectedExercise: exercise))
+        self._poseEstimator = StateObject(wrappedValue: PoseEstimator(selectedExercise: exercise, maxArmPosition: maxArmPosition, maxSquatPosition: maxSquatPosition))
     }
         
     

@@ -16,14 +16,19 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
     @Published var exerciseCount = 0
     @Published var wasInBottomPosition = false
     
+    @Published var maxArmPosition: CGFloat = 0
+    @Published var maxSquatPosition: CGFloat = 0
     
     
-    init(selectedExercise: String) {
+    
+    init(selectedExercise: String, maxArmPosition: CGFloat, maxSquatPosition: CGFloat) {
         self.currentExercise = selectedExercise
+        self.maxArmPosition = maxArmPosition
+        self.maxSquatPosition = maxSquatPosition
         super.init()
         $bodyParts
             .dropFirst()
-            .sink { [weak self] bodyParts in
+            .sink { [weak self] bodyParts in // Learn more about weak self
                 guard let self = self else { return }
                 switch self.currentExercise {
                     case "Shoulder Raises":
@@ -80,10 +85,8 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
               self.exerciseCount += 1
               self.wasInBottomPosition = false
           }
-          // To track if
       }
       
-      // THIS LOOKS LIKE A GOOD START FOR MAKING EXERCISES
       
       func countSquats(bodyParts: [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]) {
           

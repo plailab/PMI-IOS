@@ -40,7 +40,7 @@ struct WelcomeView: View {
                         }
                         .pickerStyle(.menu)
                         
-                        NavigationLink(destination: CalibrationView(exercise: selection)) {
+                        NavigationLink(destination: BodyPoseDetectionView(exercise: selection)) {
                             Text("Start Detection")
                                 .font(.headline)
                                 .foregroundColor(.white)

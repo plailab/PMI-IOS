@@ -14,8 +14,10 @@ struct GameView: View {
 
     var body: some View {
         switch exercise {
-        case "ShoulderRaise":
+        case "Shoulder Raises":
             ShoulderRaiseGameView(poseEstimator: poseEstimator, size: size)
+        case "Leg Raises":
+            LegRaiseGameView(poseEstimator: poseEstimator, size: size)
         default:
             ShoulderRaiseGameView(poseEstimator: poseEstimator, size: size)
         }

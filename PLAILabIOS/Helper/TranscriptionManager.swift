@@ -1,4 +1,5 @@
 import OpenAI
+import Foundation
 
 class TranscriptionManager {
     private let openAI: OpenAI

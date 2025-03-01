@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4B9955B82D73A7D1005D8A73 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4B9955B72D73A7D1005D8A73 /* OpenAI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4B13DC862D471C7E00378B82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B9955B82D73A7D1005D8A73 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				4B13DC772D471C7D00378B82 /* PLAILabIOS */,
 				4B13DC882D471C7E00378B82 /* PLAILabIOSTests */,
 				4B13DC922D471C7E00378B82 /* PLAILabIOSUITests */,
+				4B9955B62D73A7D1005D8A73 /* Frameworks */,
 				4B13DC762D471C7D00378B82 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4B9955B62D73A7D1005D8A73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,12 +119,14 @@
 			buildRules = (
 			);
 			dependencies = (
+				4B9955B52D73A79E005D8A73 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4B13DC772D471C7D00378B82 /* PLAILabIOS */,
 			);
 			name = PLAILabIOS;
 			packageProductDependencies = (
+				4B9955B72D73A7D1005D8A73 /* OpenAI */,
 			);
 			productName = PLAILabIOS;
 			productReference = 4B13DC752D471C7D00378B82 /* PLAILabIOS.app */;
@@ -269,6 +284,10 @@
 			target = 4B13DC742D471C7D00378B82 /* PLAILabIOS */;
 			targetProxy = 4B13DC902D471C7E00378B82 /* PBXContainerItemProxy */;
 		};
+		4B9955B52D73A79E005D8A73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 4B9955B42D73A79E005D8A73 /* OpenAI */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -399,7 +418,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = AFU99G929X;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -431,7 +450,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = AFU99G929X;
+				DEVELOPMENT_TEAM = 47BX55MGYF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -578,6 +597,19 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4B9955B42D73A79E005D8A73 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4BA7250E2D6D4FB3005DD6B2 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		4B9955B72D73A7D1005D8A73 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4BA7250E2D6D4FB3005DD6B2 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4B13DC6D2D471C7D00378B82 /* Project object */;
 }

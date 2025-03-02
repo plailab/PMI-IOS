@@ -4,7 +4,7 @@ import AVFoundation
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
     @State private var name: String = ""
-    let exercises = ["Shoulder Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
+    let exercises = ["Shoulder Raises", "Leg Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
     let synthesizer = AVSpeechSynthesizer()
     
     var body: some View {

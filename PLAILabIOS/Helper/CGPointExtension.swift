@@ -18,5 +18,4 @@ extension CGPoint {
             y: min(max(y, 0), size.height)
         )
     }
-    
 }

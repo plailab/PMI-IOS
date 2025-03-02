@@ -127,7 +127,6 @@ class PoseEstimator: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, Obs
     
     private func countKneeRaises(bodyParts: [VNHumanBodyPoseObservation.JointName : VNRecognizedPoint]) {
     }
-
   }
     
    

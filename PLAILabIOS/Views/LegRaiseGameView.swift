@@ -3,54 +3,102 @@ import SwiftUI
 struct LegRaiseGameView: View {
     @ObservedObject var poseEstimator: PoseEstimator
     var size: CGSize
-    @State private var frameIndex = 4
-    let frameCount = 3 // number of pacman figures to animate, currently 3
-    @State private var dotPositionLeft = CGPoint(x: 0, y: 0)
-    @State private var dotPositionRight = CGPoint(x: 0, y: 0)
-    @State private var showDotTop = true // start at top by default
+    @State private var frameIndex = 1
+    let normalFrameCount = 4 // Number of frames for gold block animation
+    let poppedFrameCount = 3  // Frames for popped version
+
+    @State private var goldBlockPos = CGPoint.zero
+    @State private var blockAtTop = false // Start at top by default
+    @State private var blockIsHit: Bool = false
+    @State private var goldBlockPosUp = CGPoint.zero
+    @State private var goldBlockPosDown = CGPoint.zero
+    
     
     let touchingOffset: CGFloat = 30.0
-    let dotOffsetY: CGFloat = 200.0
     
     var body: some View {
-        if poseEstimator.bodyParts.isEmpty == false {
+        GeometryReader { geometry in
+            let screenWidth = geometry.size.width
+            let screenHeight = geometry.size.height
+            
             ZStack {
-//                 consider using a more visual element, avoiding similar color with background
-                Image("goldblock/goldblock")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .position(CGPoint(x: 50, y: 50))
-                    .onAppear {
-                        // Start the timer when the view appears
-                        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
-                            // Loop through frames
-                            frameIndex = (frameIndex % frameCount) + 1
-                        }
-                    }
-                
-                // hide the pacman if it is outside of the two sides of the screen
-                if poseEstimator.bodyParts[.leftAnkle]?.x ?? 0 != 0 {
-                    Image("mario-running") // Switch images based on the condition
+                if !blockIsHit {
+                    Image("goldblock/goldblock\(frameIndex)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .rotationEffect(blockAtTop ? .degrees(0) : .degrees(-90)) // Rotate if at bottom
+                        .position(goldBlockPos)
+                } else {
+                    Image("goldblock/popped\(frameIndex)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 140, height: 140)
+                        .rotationEffect(blockAtTop ? .degrees(0) : .degrees(-90)) // Rotate if at bottom
+                        .position(goldBlockPos)
+                }
+                // Display Mario and Luigi based on ankle positions
+                if let leftAnkle = poseEstimator.bodyParts[.leftAnkle]?.location {
+                    Image("mario-running")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
-                        .position(inversePoint(poseEstimator.bodyParts[.leftAnkle]!.location, in: size))
+                        .position(inversePoint(leftAnkle, in: size))
                 }
                 
-                if poseEstimator.bodyParts[.rightAnkle]?.x ?? 0 != 0 {
-                    Image("luigi-running") // Switch images based on the condition
+                if let rightAnkle = poseEstimator.bodyParts[.rightAnkle]?.location {
+                    Image("luigi-running")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200, height: 200)
-                        .position(inversePoint(poseEstimator.bodyParts[.rightAnkle]!.location, in: size))
+                        .position(inversePoint(rightAnkle, in: size))
                 }
+            }
+            .onAppear {
+                startGoldBlockAnimation()
+                // Initialize gold block positions based on screen size
+                goldBlockPosUp = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.7)
+                goldBlockPosDown = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.8)
+                
+                goldBlockPos = blockAtTop ? goldBlockPosUp : goldBlockPosDown
             }
             .onChange(of: poseEstimator.bodyParts) { _ in
                 // Update points whenever the bodyParts change
-                        
-                
+                if let leftAnkle = poseEstimator.bodyParts[.leftAnkle]?.location,
+                   let rightAnkle = poseEstimator.bodyParts[.rightAnkle]?.location {
+                    
+                    let invLeftAnkle = inversePoint(leftAnkle, in: size)
+                    let invRightAnkle = inversePoint(rightAnkle, in: size)
+                    
+                    let goldBlockPosUp = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.7)
+                    let goldBlockPosDown = CGPoint(x: screenWidth * 0.3, y: screenHeight * 0.9)
+                    
+                    // only check collision when the block is not hit (no checking during animation)
+                    if !blockIsHit && (goldBlockPos.distance(to: invLeftAnkle) <= touchingOffset ||
+                        goldBlockPos.distance(to: invRightAnkle) <= touchingOffset) {
+                        blockIsHit = true
+                        frameIndex = 1
+                        //only increase the score when it is hitting the top one, given that 1 top 1 bottom is one rep
+                        if blockAtTop {
+                            poseEstimator.exerciseCount += 1
+                        }
+                        // Switch back to normal after animation completes
+                        DispatchQueue.main.asyncAfter(deadline: .now() + (0.2 * Double(poppedFrameCount))) {
+                            frameIndex = 1
+                            blockAtTop.toggle()
+                            goldBlockPos = blockAtTop ? goldBlockPosUp : goldBlockPosDown
+                            blockIsHit = false
+                        }
+                    }
+                }
             }
+        }
+    }
+    
+    // Start animation timer for gold block
+    private func startGoldBlockAnimation() {
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
+            frameIndex = (frameIndex % (blockIsHit ? poppedFrameCount : normalFrameCount)) + 1
         }
     }
 }

@@ -49,6 +49,19 @@ struct WelcomeView: View {
                                 .background(Color.blue)
                                 .cornerRadius(10)
                         }
+                        NavigationLink(destination: RecipeVoiceEntryView(onSubmit: {
+                            // Code to execute when the user submits their voice input
+                            print("Recipe submitted!")
+                            // You might want to save data, navigate back, etc.
+                        })) {
+                            Text("Start Voice")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(width: 200)
+                                .background(Color.blue)
+                                .cornerRadius(10)
+                        }
                     }
                 }
             }

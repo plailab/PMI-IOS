@@ -30,7 +30,31 @@ struct BodyPoseDetectionView: View {
                 }
             }.edgesIgnoringSafeArea(.all)
             .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * 1920 / 1080, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-           
+            // make back button more obvious
+            .navigationBarBackButtonHidden(true) // Hide default back button
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // Navigate back
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let rootViewController = windowScene.windows.first?.rootViewController {
+                            rootViewController.dismiss(animated: true, completion: nil)
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 18, weight: .bold))
+                            Text("Back")
+                                .font(.system(size: 18))
+                        }
+                        .foregroundColor(.white)
+                        .padding(5)
+                        .background(Color.blue) // Background color
+                        .cornerRadius(8)
+                    }
+                }
+            }
+
             
             HStack {
                 Text("\(exercise) :")

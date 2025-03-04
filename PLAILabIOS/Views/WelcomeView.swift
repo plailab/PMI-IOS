@@ -99,29 +99,8 @@ struct WelcomeView: View {
                 }
                 .padding(.horizontal, 20)
             }
-        }.navigationBarBackButtonHidden(true) // Hide the default back button
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        // Navigate back
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                           let rootViewController = windowScene.windows.first?.rootViewController {
-                            rootViewController.dismiss(animated: true, completion: nil)
-                        }
-                    }) {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                            Text("Back")
-                        }
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.white)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 12)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                    }
-                }
-            }
+        }
+
     }
 }
 

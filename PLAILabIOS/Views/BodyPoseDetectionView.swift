@@ -25,14 +25,15 @@ struct BodyPoseDetectionView: View {
             ZStack {
                 GeometryReader { geo in
                     CameraViewWrapper(poseEstimator: poseEstimator)
-                    StickFigureView(poseEstimator: poseEstimator, size: geo.size)
+//                    StickFigureView(poseEstimator: poseEstimator, size: geo.size)
                     GameView(poseEstimator: poseEstimator, size: geo.size, exercise: exercise)
                 }
-            }.frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * 1920 / 1080, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            }.edgesIgnoringSafeArea(.all)
+            .frame(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.width * 1920 / 1080, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
            
             
             HStack {
-                Text("\(exercise) counter:")
+                Text("\(exercise) :")
                     .font(.title)
                 Text(String(poseEstimator.exerciseCount)) // This needs to be changed to be dependent on the exercise
                 // maybe i should have a struct so that if they choose the shoulder raise variable, there is a thing for the count and that stuff automatically

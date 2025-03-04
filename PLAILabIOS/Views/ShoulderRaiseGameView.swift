@@ -11,7 +11,7 @@ struct ShoulderRaiseGameView: View {
     
     @State private var armLength = CGFloat(0)
     
-    let touchingOffset: CGFloat = 30.0
+    let collisionTolerance: CGFloat = 50.0
     let dotOffsetY: CGFloat = 200.0
     
     var body: some View {
@@ -99,8 +99,8 @@ struct ShoulderRaiseGameView: View {
                         
                         if showDotTop {
                             // Check if both wrists are close enough to their respective "top" positions
-                            if dotPositionLeft.distance(to: inverseLeftWrist) <= touchingOffset &&
-                                dotPositionRight.distance(to: inverseRightWrist) <= touchingOffset {
+                            if dotPositionLeft.distance(to: inverseLeftWrist) <= collisionTolerance &&
+                                dotPositionRight.distance(to: inverseRightWrist) <= collisionTolerance {
                                 
                                 showDotTop.toggle()
                                 
@@ -110,8 +110,8 @@ struct ShoulderRaiseGameView: View {
                             }
                         } else {
                             // Check if both wrists are touching their respective "bottom" positions
-                            if dotPositionLeft.distance(to: inverseLeftWrist) <= touchingOffset &&
-                                dotPositionRight.distance(to: inverseRightWrist) <= touchingOffset {
+                            if dotPositionLeft.distance(to: inverseLeftWrist) <= collisionTolerance &&
+                                dotPositionRight.distance(to: inverseRightWrist) <= collisionTolerance {
                                 
                                 showDotTop.toggle()
                                 

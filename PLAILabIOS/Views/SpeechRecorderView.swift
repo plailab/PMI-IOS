@@ -20,7 +20,6 @@ struct SpeechRecorderView: View {
                             .font(.system(size: 24))
                     }
                     .shadow(radius: 3)
-//                    .animation(.spring(), value: speechManager.state)
                 }
                 
                 // Status and instructions

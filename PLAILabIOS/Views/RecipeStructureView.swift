@@ -1,6 +1,19 @@
 import SwiftUICore
 import SwiftUI
 
+
+// https://platform.openai.com/docs/guides/realtime
+// https://www.youtube.com/watch?v=eWsvwTnscBA
+// I could possibly do a webserver in cloudflare or I can just call it directly
+// If I do in cloudflare there will probably be more support,
+// but if I do it that way, it just adds an extra layer of complexity
+
+
+// If we go with realtime api, i imagine it taking a week to set up. (and a lot longer for actual good integration)
+// it seems really interesting though because it supports function calling
+// which means if the user wants to change the color or the exercise, they could probably
+// ask for a list (using a getter function), then say change exercise (setter function) to one from the list
+
 struct RecipeVoiceEntryView: View {
     @StateObject var speechManager = SpeechManager(audioRecorder: AudioRecorderManager(), transcriptionManager: TranscriptionManager(apiToken: getApiKey() ?? "Bruh"))
     @State private var isRecording = false

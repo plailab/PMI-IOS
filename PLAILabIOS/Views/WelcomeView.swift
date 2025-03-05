@@ -4,68 +4,103 @@ import AVFoundation
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
     @State private var name: String = ""
-    let exercises = ["Shoulder Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
+//    let exercises = ["Shoulder Raises", "Leg Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
+    // exercises that are playable currently
+    let exercises = ["Shoulder Raises", "Leg Raises"]
     let synthesizer = AVSpeechSynthesizer()
     
     var body: some View {
         NavigationView {
             ZStack {
-                Color.blue.opacity(0.2).edgesIgnoringSafeArea(.all)
+                // Simple solid background color
+                Color.blue.opacity(0.1)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 40) {
                     VStack {
                         Text("PLAIful Movement")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                            .font(.system(size: 38, weight: .bold))
+                            .foregroundColor(.blue)
                         
                         Text("Tap to start playing!")
                             .font(.title2)
                             .foregroundColor(.gray)
                         
-                        TextField("Name", text: $name)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding()
+//                        TextField("Name", text: $name)
+//                            .textFieldStyle(RoundedBorderTextFieldStyle())
+//                            .padding()
+//
+//                        Button("Greet") {
+//                            configureAudioOutput() // Ensure correct audio routing
+//                            let utterance = AVSpeechUtterance(string: "Hello \(name)!")
+//                            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+//                            synthesizer.speak(utterance)
+//                        }
                         
-                        Button("Greet") {
-                            configureAudioOutput() // Ensure correct audio routing
-                            let utterance = AVSpeechUtterance(string: "Hello \(name)!")
-                            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                            synthesizer.speak(utterance)
-                        }
-                        
-                        Picker("Select an exercise", selection: $selection) {
-                            ForEach(exercises, id: \.self) {
-                                Text($0)
+                        // Simple exercise display
+                        VStack(spacing: 20) {
+                            Text(selection)
+                                .font(.system(size: 32, weight: .bold))
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                            
+                            // Simple shuffle button
+                            Button(action: {
+                                // Randomly select a different exercise
+                                var newSelection: String
+                                repeat {
+                                    newSelection = exercises.randomElement() ?? selection
+                                } while newSelection == selection && exercises.count > 1
+                                
+                                selection = newSelection
+                            }) {
+                                HStack {
+                                    Image(systemName: "shuffle")
+                                        .font(.system(size: 22))
+                                    Text("Shuffle Exercise")
+                                        .font(.system(size: 22))
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.blue)
+                                .cornerRadius(8)
                             }
                         }
-                        .pickerStyle(.menu)
                         
+                        // Simple start button
                         NavigationLink(destination: BodyPoseDetectionView(exercise: selection)) {
-                            Text("Start Detection")
-                                .font(.headline)
+                            Text("Start Exercising")
+                                .font(.system(size: 24))
                                 .foregroundColor(.white)
                                 .padding()
-                                .frame(width: 200)
-                                .background(Color.blue)
-                                .cornerRadius(10)
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.green)
+                                .cornerRadius(8)
                         }
-                        NavigationLink(destination: RecipeVoiceEntryView(onSubmit: {
-                            // Code to execute when the user submits their voice input
-                            print("Recipe submitted!")
-                            // You might want to save data, navigate back, etc.
-                        })) {
-                            Text("Start Voice")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(width: 200)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                        }
+//                        NavigationLink(destination: RecipeVoiceEntryView(onSubmit: {
+//                            // Code to execute when the user submits their voice input
+//                            print("Recipe submitted!")
+//                            // You might want to save data, navigate back, etc.
+//                        })) {
+//                            Text("Start Voice")
+//                                .font(.headline)
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .frame(width: 200)
+//                                .background(Color.blue)
+//                                .cornerRadius(10)
+//                        }
                     }
                 }
+                .padding(.horizontal, 20)
             }
         }
+
     }
 }
 

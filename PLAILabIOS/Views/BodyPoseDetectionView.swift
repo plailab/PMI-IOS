@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct BodyPoseDetectionView: View {
-    
     let exercise: String // taken from Welcome View Selection
     
     @Environment(\.presentationMode) var presentationMode
@@ -62,6 +61,13 @@ struct BodyPoseDetectionView: View {
                 
             }.padding(.bottom, 50)
         }
+        .onAppear {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+        .onDisappear {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
     }
+    
 }
 

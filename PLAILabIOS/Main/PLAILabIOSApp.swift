@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-@main // SAYS WHICH FILE TO START ON 
+
+@main // SAYS WHICH FILE TO START ON
 struct PLAILabIOSApp: App {
     var body: some Scene {
         WindowGroup {

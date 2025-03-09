@@ -6,11 +6,15 @@ struct BodyPoseDetectionView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var poseEstimator: PoseEstimator
     
-    // Timer related properties
+    // Timer and exercise related properties
     @State private var counter = 0
     private let timerLimit = 60
+    @State private var setCount = 0
     @State private var timer: Timer? = nil
     @State private var isTimerRunning = false
+    @State private var isResting = false // Track if in rest period
+    @State private var lastExerciseCount = 0 // To track previous exercise count
+    private let repsPerSet = 12
     
     // Constructor
     init(exercise: String) {
@@ -50,49 +54,96 @@ struct BodyPoseDetectionView: View {
                 }
             }
             
-            // Exercise count display
-            HStack {
-                Text("\(exercise) :")
-                    .font(.title)
-                Text(String(poseEstimator.exerciseCount))
-                    .font(.title)
-            }
-            
-            // Timer display
-            HStack {
-                Text("Timer: ")
-                    .font(.title2)
-                Text("\(timerLimit - counter)") // for a 30 second break
-                    .font(.title2)
-            }
-            
-            // Timer controls
-            HStack(spacing: 20) {
-                Button(action: startTimer) {
-                    Text("Start Timer")
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+            // Exercise and set information display
+            VStack(spacing: 15) {
+                HStack {
+                    Text("\(exercise) Count:")
+                        .font(.title)
+                    Text(String(isResting ? lastExerciseCount : poseEstimator.exerciseCount))
+                        .font(.title)
                 }
                 
-                Button(action: stopTimer) {
-                    Text("Stop Timer")
+                HStack {
+                    Text("Set:")
+                        .font(.title2)
+                    Text("\(setCount)")
+                        .font(.title2)
+                }
+                
+                // Status and timer display
+                if isResting {
+                    Text("REST TIME")
+                        .font(.title)
+                        .foregroundColor(.red)
                         .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
+                    
+                    HStack {
+                        Text("Time Remaining:")
+                            .font(.title2)
+                        Text("\(timerLimit - counter)")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                    }
+                } else {
+                    Text("WORKOUT TIME")
+                        .font(.title)
+                        .foregroundColor(.green)
+                        .padding()
                 }
             }
-            .padding(.bottom, 50)
+            
+            // Timer controls (only show during rest)
+            if isResting {
+                HStack(spacing: 20) {
+                    Button(action: {
+                        // Skip rest
+                        endRestPeriod()
+                    }) {
+                        Text("Skip Rest")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }
+                .padding(.bottom, 150)
+            }
+            
+            Spacer()
+        }
+        // Added bottom padding to make all content visible
+        .padding(.bottom, 30)
+        .onChange(of: poseEstimator.exerciseCount) { newCount in
+            // Check if we've completed a set and should start resting
+            if !isResting && newCount >= repsPerSet {
+                startRestPeriod()
+            }
         }
         .onAppear {
             UIApplication.shared.isIdleTimerDisabled = true
         }
         .onDisappear {
-            stopTimer() // Make sure to stop timer when view disappears
+            stopTimer()
             UIApplication.shared.isIdleTimerDisabled = false
         }
+    }
+    
+    // Start rest period after completing a set
+    private func startRestPeriod() {
+        isResting = true
+        lastExerciseCount = poseEstimator.exerciseCount
+        setCount += 1
+        counter = 0
+        startTimer()
+    }
+    
+    // End rest period and prepare for next set
+    private func endRestPeriod() {
+        stopTimer()
+        isResting = false
+        counter = 0
+        // Reset the exercise count in PoseEstimator
+        poseEstimator.exerciseCount = 0
     }
     
     // Timer functions
@@ -102,10 +153,11 @@ struct BodyPoseDetectionView: View {
         isTimerRunning = true
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             self.counter += 1
-        }
-        // Check if counter has reached the limit
-        if self.counter >= self.timerLimit {
-            self.stopTimer()
+            
+            // Check if counter has reached the limit
+            if self.counter >= self.timerLimit {
+                self.endRestPeriod()
+            }
         }
     }
     

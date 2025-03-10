@@ -1,5 +1,14 @@
 import SwiftUI
 
+
+// In the future, how do we want to decide sets and how many reps?
+// Should not push until failure
+// Create a reminder for them every day (push notifs?)
+// https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-older-adults/
+// Do we want to start saving information? (save account info and use firebase?)
+
+
+
 struct BodyPoseDetectionView: View {
     let exercise: String // taken from Welcome View Selection
     
@@ -8,7 +17,7 @@ struct BodyPoseDetectionView: View {
     
     // Timer and exercise related properties
     @State private var counter = 0
-    private let timerLimit = 60
+    private let timerLimit = 60 // timer for rest
     @State private var setCount = 0
     @State private var timer: Timer? = nil
     @State private var isTimerRunning = false
@@ -74,6 +83,7 @@ struct BodyPoseDetectionView: View {
                 if isResting {
                     Text("REST TIME")
                         .font(.title)
+                        .bold()
                         .foregroundColor(.red)
                         .padding()
                     
@@ -84,35 +94,33 @@ struct BodyPoseDetectionView: View {
                             .font(.title2)
                             .foregroundColor(.red)
                     }
+                    HStack(spacing: 20) {
+                        Button(action: {
+                            // Skip rest
+                            endRestPeriod()
+                        }) {
+                            Text("Skip Rest")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.bottom, 150)
                 } else {
                     Text("WORKOUT TIME")
                         .font(.title)
+                        .bold()
                         .foregroundColor(.green)
                         .padding()
                 }
             }
             
-            // Timer controls (only show during rest)
-            if isResting {
-                HStack(spacing: 20) {
-                    Button(action: {
-                        // Skip rest
-                        endRestPeriod()
-                    }) {
-                        Text("Skip Rest")
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
-                }
-                .padding(.bottom, 150)
-            }
+            
             
             Spacer()
         }
-        // Added bottom padding to make all content visible
-        .padding(.bottom, 30)
+        .padding(.bottom, 50)
         .onChange(of: poseEstimator.exerciseCount) { newCount in
             // Check if we've completed a set and should start resting
             if !isResting && newCount >= repsPerSet {

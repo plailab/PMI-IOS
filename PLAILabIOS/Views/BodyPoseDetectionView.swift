@@ -36,6 +36,7 @@ struct BodyPoseDetectionView: View {
             ZStack {
                 GeometryReader { geo in
                     CameraViewWrapper(poseEstimator: poseEstimator)
+                    StickFigureView(poseEstimator: poseEstimator, size: geo.size)
                     GameView(poseEstimator: poseEstimator, size: geo.size, exercise: exercise)
                 }
             }

@@ -23,11 +23,13 @@ struct BodyPoseDetectionView: View {
     @State private var isTimerRunning = false
     @State private var isResting = false // Track if in rest period
     @State private var lastExerciseCount = 0 // To track previous exercise count
-    private let repsPerSet = 12
+    
+    @Binding var repsPerSet: Int  // Binding to parent’s state
     
     // Constructor
-    init(exercise: String) {
+    init(exercise: String, repsPerSet: Binding<Int>) {
         self.exercise = exercise
+        self._repsPerSet = repsPerSet
         self._poseEstimator = StateObject(wrappedValue: PoseEstimator(selectedExercise: exercise))
     }
     
@@ -36,7 +38,7 @@ struct BodyPoseDetectionView: View {
             ZStack {
                 GeometryReader { geo in
                     CameraViewWrapper(poseEstimator: poseEstimator)
-                    StickFigureView(poseEstimator: poseEstimator, size: geo.size)
+//                    StickFigureView(poseEstimator: poseEstimator, size: geo.size)
                     GameView(poseEstimator: poseEstimator, size: geo.size, exercise: exercise)
                 }
             }

@@ -8,7 +8,8 @@ struct WelcomeView: View {
     // exercises that are playable currently
     let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
     let synthesizer = AVSpeechSynthesizer()
-    
+    @State private var repsPerSet: Int = 12  // Parent owns state
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -69,8 +70,19 @@ struct WelcomeView: View {
                             }
                         }
                         
+                        Text("Reps per Sets: \(Int(repsPerSet))")  // Display the slider value
+                            .font(.headline)
+                        
+                        Slider(
+                            value: Binding(
+                                get: { Double(repsPerSet) },  // Convert Int to Double for the slider
+                                set: { repsPerSet = Int($0) } // Convert back to Int when updating
+                            ),
+                            in: 0...24,
+                            step: 1
+                        )
                         // Simple start button
-                        NavigationLink(destination: BodyPoseDetectionView(exercise: selection)) {
+                        NavigationLink(destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $repsPerSet)) {
                             Text("Start Exercising")
                                 .font(.system(size: 24))
                                 .foregroundColor(.white)

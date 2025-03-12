@@ -88,8 +88,10 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
                     // All arrows have been touched, reset or update the state as needed
                     // For example, reset the arrows if desired
                     arrows = createArrows(screenWidth: geometry.size.width, screenHeight: geometry.size.height, yPos: neckPos.y)
+                    if !arrowLeft{
+                        poseEstimator.exerciseCount += 1
+                    }
                     arrowLeft.toggle()
-                    poseEstimator.exerciseCount += 1
                 }
             }
         }

@@ -6,9 +6,10 @@ struct WelcomeView: View {
     @State private var name: String = ""
 //    let exercises = ["Shoulder Raises", "Leg Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
     // exercises that are playable currently
-    let exercises = ["Shoulder Raises", "Leg Raises"]
+    let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
     let synthesizer = AVSpeechSynthesizer()
-    
+    @State private var repsPerSet: Int = 12  // Parent owns state
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -37,29 +38,27 @@ struct WelcomeView: View {
 //                            synthesizer.speak(utterance)
 //                        }
                         
-                        // Simple exercise display
                         VStack(spacing: 20) {
                             Text(selection)
                                 .font(.system(size: 32, weight: .bold))
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color.white)
+                                .background(Color(UIColor.systemBackground)) // Background adapts to light/dark mode
                                 .cornerRadius(8)
+                                .foregroundColor(Color.primary) // Text color is black in light mode
                             
                             // Simple shuffle button
                             Button(action: {
-                                // Randomly select a different exercise
-                                var newSelection: String
-                                repeat {
-                                    newSelection = exercises.randomElement() ?? selection
-                                } while newSelection == selection && exercises.count > 1
-                                
-                                selection = newSelection
+                                // Cycle through the exercises
+                                if let currentIndex = exercises.firstIndex(of: selection) {
+                                    let nextIndex = (currentIndex + 1) % exercises.count
+                                    selection = exercises[nextIndex]
+                                }
                             }) {
                                 HStack {
                                     Image(systemName: "shuffle")
                                         .font(.system(size: 22))
-                                    Text("Shuffle Exercise")
+                                    Text("Next Exercise")
                                         .font(.system(size: 22))
                                 }
                                 .foregroundColor(.white)
@@ -71,8 +70,19 @@ struct WelcomeView: View {
                             }
                         }
                         
+                        Text("Reps per Sets: \(Int(repsPerSet))")  // Display the slider value
+                            .font(.headline)
+                        
+                        Slider(
+                            value: Binding(
+                                get: { Double(repsPerSet) },  // Convert Int to Double for the slider
+                                set: { repsPerSet = Int($0) } // Convert back to Int when updating
+                            ),
+                            in: 0...24,
+                            step: 1
+                        )
                         // Simple start button
-                        NavigationLink(destination: BodyPoseDetectionView(exercise: selection)) {
+                        NavigationLink(destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $repsPerSet)) {
                             Text("Start Exercising")
                                 .font(.system(size: 24))
                                 .foregroundColor(.white)

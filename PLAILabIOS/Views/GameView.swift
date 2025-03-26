@@ -18,6 +18,8 @@ struct GameView: View {
             ShoulderRaiseGameView(poseEstimator: poseEstimator, size: size)
         case "Leg Raises":
             LegRaiseGameView(poseEstimator: poseEstimator, size: size)
+        case "Cross Body Reach":
+            CrossBodyReachGameView(poseEstimator: poseEstimator, size: size)
         default:
             ShoulderRaiseGameView(poseEstimator: poseEstimator, size: size)
         }

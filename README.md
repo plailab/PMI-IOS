@@ -2,6 +2,8 @@
 
 A team of researchers from the Plai Lab at Olin College of Engineering will be putting together an interface which is aimed at helping those recovering from cancer by offering users a curriculum with a set of helpful movements and exercises that build muscle and increase flexibility, especially for bed-bound or chair-bound patients. The interface will be suitable for devices with cameras so that it can display live video of the user and augmented reality (AR) objects to make the exercises more engaging through narrative. This project aims to design inclusive technology by serving a user group that has been historically overlooked in the design of versatile digital healthcare tools and would stand to greatly benefit from them.
 
+You will soon be able to use this app on the app store!
+
 ## Design Goals
 
 The design goals determined at the outset of the project are listed below:
@@ -25,6 +27,31 @@ The following steps are necessary to run the interface on a personal device:
   - Include diagrams that your team has made that depict relationships between components of your subsystems.
     - These may include electronics schematics, CAD renderings, code UML diagrams, and/or hand-drawings that help us understand connections within and between your software, electrical, and mechanical components.
 
+## Install Instructions
+
+Clone the swift repository in desired directory
+```bash
+https://github.com/plailab/PMI-IOS.git
+```
+CD into directory
+```bash
+cd PMI-IOS
+```
+Download necessary dependencies
+```bash
+pod install
+```
+Open the project from terminal
+```bash
+open PMI-IOS.xcworkspace
+```
+Set up environment variables making an secrets.plist file secrets :D
+
+Follow Voice Assistant Agent instructions before you can actually run the voice assistant
+```bash
+https://github.com/plailab/VoiceAssistant.git
+```
+   
 ## Contact Us
 
 Please reach out to Elías (elopezdallanora@olin.edu) or Xavier (xnishikawa@olin.edu) with any questions.

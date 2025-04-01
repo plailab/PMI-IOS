@@ -96,10 +96,13 @@ class UIUpdateClient: ObservableObject {
              Global variable (background color, so when it changes, it will actually affect the ContentView (where it is called)
              IN THE FUTURE WE CAN ASK IT TO PASS A HEXADECIMAL, SO IT CAN BE ANY COLOR RATHER THAN A SWITCH AND CASE
         */
-        print(colorString)
         DispatchQueue.main.async {
-            self.backgroundColor = self.color(from: colorString) ?? .black // black means you won't be able to see anything lol, so its broken
-        }
+               let newColor = self.color(from: colorString) ?? .black
+               print("Setting background color to: \(newColor)")
+               self.backgroundColor = newColor
+            print(self.backgroundColor)
+           }
+
     }
     
     private func color(from string: String) -> Color? {

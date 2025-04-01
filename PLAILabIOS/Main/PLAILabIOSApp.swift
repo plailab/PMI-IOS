@@ -10,9 +10,13 @@ import SwiftUI
 
 @main // SAYS WHICH FILE TO START ON
 struct PLAILabIOSApp: App {
+    private var tokenService: TokenService = .init()
+
     var body: some Scene {
         WindowGroup {
             WelcomeView()
+                .environmentObject(tokenService)
         }
+
     }
 }

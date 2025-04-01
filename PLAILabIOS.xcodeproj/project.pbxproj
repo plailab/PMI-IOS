@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B44D2142D9C04D6009C43E8 /* LiveKitComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 4B44D2132D9C04D6009C43E8 /* LiveKitComponents */; };
 		4B5E6B192D9B4B08003B0F3A /* LiveKitKrispNoiseFilter in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5E6B182D9B4B08003B0F3A /* LiveKitKrispNoiseFilter */; };
 		4B5E6B1B2D9B4B0B003B0F3A /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5E6B1A2D9B4B0B003B0F3A /* LiveKit */; };
 		4B9955B82D73A7D1005D8A73 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 4B9955B72D73A7D1005D8A73 /* OpenAI */; };
@@ -61,6 +62,7 @@
 				4B5E6B1B2D9B4B0B003B0F3A /* LiveKit in Frameworks */,
 				4B5E6B192D9B4B08003B0F3A /* LiveKitKrispNoiseFilter in Frameworks */,
 				4B9955B82D73A7D1005D8A73 /* OpenAI in Frameworks */,
+				4B44D2142D9C04D6009C43E8 /* LiveKitComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +125,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4B44D2122D9C04CE009C43E8 /* PBXTargetDependency */,
 				4B5E6B1D2D9B4B0E003B0F3A /* PBXTargetDependency */,
 				4B5E6B172D9B4B02003B0F3A /* PBXTargetDependency */,
 				4B9955B52D73A79E005D8A73 /* PBXTargetDependency */,
@@ -135,6 +138,7 @@
 				4B9955B72D73A7D1005D8A73 /* OpenAI */,
 				4B5E6B182D9B4B08003B0F3A /* LiveKitKrispNoiseFilter */,
 				4B5E6B1A2D9B4B0B003B0F3A /* LiveKit */,
+				4B44D2132D9C04D6009C43E8 /* LiveKitComponents */,
 			);
 			productName = PLAILabIOS;
 			productReference = 4B13DC752D471C7D00378B82 /* PLAILabIOS.app */;
@@ -222,6 +226,8 @@
 				4BA7250E2D6D4FB3005DD6B2 /* XCRemoteSwiftPackageReference "OpenAI" */,
 				4B5E6B142D9B4A3E003B0F3A /* XCRemoteSwiftPackageReference "client-sdk-swift" */,
 				4B5E6B152D9B4AE6003B0F3A /* XCRemoteSwiftPackageReference "swift-krisp-noise-filter" */,
+				4B44D20F2D9C0454009C43E8 /* XCRemoteSwiftPackageReference "swift-docc-plugin" */,
+				4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4B13DC762D471C7D00378B82 /* Products */;
@@ -293,6 +299,10 @@
 			isa = PBXTargetDependency;
 			target = 4B13DC742D471C7D00378B82 /* PLAILabIOS */;
 			targetProxy = 4B13DC902D471C7E00378B82 /* PBXContainerItemProxy */;
+		};
+		4B44D2122D9C04CE009C43E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 4B44D2112D9C04CE009C43E8 /* LiveKitComponents */;
 		};
 		4B5E6B172D9B4B02003B0F3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -606,6 +616,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4B44D20F2D9C0454009C43E8 /* XCRemoteSwiftPackageReference "swift-docc-plugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-docc-plugin.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.3;
+			};
+		};
+		4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/livekit/components-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
 		4B5E6B142D9B4A3E003B0F3A /* XCRemoteSwiftPackageReference "client-sdk-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/livekit/client-sdk-swift.git";
@@ -633,6 +659,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4B44D2112D9C04CE009C43E8 /* LiveKitComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			productName = LiveKitComponents;
+		};
+		4B44D2132D9C04D6009C43E8 /* LiveKitComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */;
+			productName = LiveKitComponents;
+		};
 		4B5E6B162D9B4B02003B0F3A /* LiveKitKrispNoiseFilter */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4B5E6B152D9B4AE6003B0F3A /* XCRemoteSwiftPackageReference "swift-krisp-noise-filter" */;

@@ -32,9 +32,6 @@ struct WelcomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Simple solid background color
-                Color.blue.opacity(0.1)
-                    .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 40) {
                     VStack {
@@ -46,16 +43,6 @@ struct WelcomeView: View {
                             .font(.title2)
                             .foregroundColor(.gray)
                         
-//                        TextField("Name", text: $name)
-//                            .textFieldStyle(RoundedBorderTextFieldStyle())
-//                            .padding()
-//
-//                        Button("Greet") {
-//                            configureAudioOutput() // Ensure correct audio routing
-//                            let utterance = AVSpeechUtterance(string: "Hello \(name)!")
-//                            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-//                            synthesizer.speak(utterance)
-//                        }
                         
                         VStack(spacing: 20) {
                             Text(selection)
@@ -67,8 +54,6 @@ struct WelcomeView: View {
                                 .foregroundColor(Color.primary) // Text color is black in light mode
                             
                             // NOTE: FUNCTION TO PRESS BUTTONS FOR EVERYTHING
-                            
-                            
                             // Simple shuffle button
                             Button(action: {
                                 // Cycle through the exercises
@@ -114,43 +99,90 @@ struct WelcomeView: View {
                                 .background(Color.green)
                                 .cornerRadius(8)
                         }
-//                        NavigationLink(destination: RecipeVoiceEntryView(onSubmit: {
-//                            // Code to execute when the user submits their voice input
-//                            print("Recipe submitted!")
-//                            // You might want to save data, navigate back, etc.
-//                        })) {
-//                            Text("Start Voice")
-//                                .font(.headline)
-//                                .foregroundColor(.white)
-//                                .padding()
-//                                .frame(width: 200)
-//                                .background(Color.blue)
-//                                .cornerRadius(10)
-//                        }
+                        ControlBar()
                     }
                 }
                 .padding(.horizontal, 20)
-            }
-        }.environmentObject(room) // Makes sure room is accessible to all child views
-            .environmentObject(uiClient) // Make UIUpdateClient available to child views
-            .background(uiClient.backgroundColor) // Apply global background color
-            .onAppear {
-                #if os(iOS) || os(macOS)
-                room.add(delegate: krispProcessor)
-                #endif
-                print("hi")
                 
-                // Connect to WebSocket server for UI updates
-                uiClient.connect()
+                // THERE IS SOME WEIRD VERTICAL PADDING OR IT NEEDS TO FILL
+                .environmentObject(room) // Makes sure room is accessible to all child views
+                    .environmentObject(uiClient) // Make UIUpdateClient available to child views
+                    .background(uiClient.backgroundColor) // Apply global background color
+                    .onReceive(uiClient.$backgroundColor) { newColor in
+                        print("Background color changed to:", newColor)
+                    }
+                    .onAppear {
+                        #if os(iOS) || os(macOS)
+                        room.add(delegate: krispProcessor)
+                        #endif
+                        print("hi")
+                        
+                        // Connect to WebSocket server for UI updates
+                        uiClient.connect()
+                        
+                        Task {
+                            await registerRpcMethods()
+                        }
+                    }
+                    .onDisappear {
+                        // Disconnect when view disappears
+                        uiClient.disconnect()
+                        print("bye")
+                    }
             }
-            .onDisappear {
-                // Disconnect when view disappears
-                uiClient.disconnect()
-                print("bye")
-            }
+        }
 
     }
+    
+    
+    
+    
+    func registerRpcMethods() async {
+        // **Background Color Change RPC**
+        await room.localParticipant.registerRpcMethod("change_background") { data in
+            print("Received background color data: \(data)")
+
+            guard let payloadStart = "\(data)".range(of: "payload: \""),
+                  let payloadEnd = "\(data)".range(of: "\", responseTimeout") else {
+                print("Failed to locate payload in string")
+                return "Error: Payload not found"
+            }
+
+            let startIndex = payloadStart.upperBound
+            let endIndex = payloadEnd.lowerBound
+            let payloadString = String("\(data)"[startIndex..<endIndex])
+                .replacingOccurrences(of: "\\\"", with: "\"")
+                .replacingOccurrences(of: "\\\\", with: "\\")
+
+            print("Extracted payload for color: \(payloadString)")
+
+            guard let jsonData = payloadString.data(using: .utf8) else {
+                print("Failed to convert to data")
+                return "Error: Data conversion failed"
+            }
+
+            do {
+                let colorInfo = try JSONDecoder().decode(ColorData.self, from: jsonData)
+                DispatchQueue.main.async {
+                    self.uiClient.updateBackgroundColor(colorInfo.color) // Update UI background
+                }
+                print("Updated background color to: \(colorInfo.color)")
+                print("new color: \(uiClient.backgroundColor)")
+
+                return "Background color updated successfully"
+            } catch {
+                print("JSON decoding error: \(error)")
+                return "Error: \(error.localizedDescription)"
+            }
+        }
+    }
 }
+
+struct ColorData: Codable {
+    let color: String
+}
+
+
 
 // Function to configure audio routing
 func configureAudioOutput() {

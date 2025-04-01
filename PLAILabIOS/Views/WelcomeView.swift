@@ -1,15 +1,34 @@
 import SwiftUI
 import AVFoundation
+import LiveKit
+
+#if os(iOS) || os(macOS)
+import LiveKitKrispNoiseFilter
+#endif
 
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
+    @StateObject private var room = Room() // the server the user is in
+    @StateObject private var uiClient = UIUpdateClient() // ui styling (put front end aesthetics changes here)
+    
+    // Krisp is available only on iOS and macOS right now (helps with noise cancellation)
+    #if os(iOS) || os(macOS)
+    private let krispProcessor = LiveKitKrispNoiseFilter()
+    #endif
+    
     @State private var name: String = ""
 //    let exercises = ["Shoulder Raises", "Leg Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
     // exercises that are playable currently
     let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
     let synthesizer = AVSpeechSynthesizer()
     @State private var repsPerSet: Int = 12  // Parent owns state
+    init() {
+        print("WelcomeView initialized")
 
+        #if os(iOS) || os(macOS)
+        AudioManager.shared.capturePostProcessingDelegate = krispProcessor
+        #endif
+    }
     var body: some View {
         NavigationView {
             ZStack {
@@ -46,6 +65,9 @@ struct WelcomeView: View {
                                 .background(Color(UIColor.systemBackground)) // Background adapts to light/dark mode
                                 .cornerRadius(8)
                                 .foregroundColor(Color.primary) // Text color is black in light mode
+                            
+                            // NOTE: FUNCTION TO PRESS BUTTONS FOR EVERYTHING
+                            
                             
                             // Simple shuffle button
                             Button(action: {
@@ -109,7 +131,23 @@ struct WelcomeView: View {
                 }
                 .padding(.horizontal, 20)
             }
-        }
+        }.environmentObject(room) // Makes sure room is accessible to all child views
+            .environmentObject(uiClient) // Make UIUpdateClient available to child views
+            .background(uiClient.backgroundColor) // Apply global background color
+            .onAppear {
+                #if os(iOS) || os(macOS)
+                room.add(delegate: krispProcessor)
+                #endif
+                print("hi")
+                
+                // Connect to WebSocket server for UI updates
+                uiClient.connect()
+            }
+            .onDisappear {
+                // Disconnect when view disappears
+                uiClient.disconnect()
+                print("bye")
+            }
 
     }
 }

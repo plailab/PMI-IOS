@@ -10,7 +10,8 @@ struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
     @StateObject private var room = Room() // the server the user is in
     @StateObject private var uiClient = UIUpdateClient() // ui styling (put front end aesthetics changes here)
-    
+    @State private var navigateToGame = false
+
     // Krisp is available only on iOS and macOS right now (helps with noise cancellation)
     #if os(iOS) || os(macOS)
     private let krispProcessor = LiveKitKrispNoiseFilter()
@@ -86,7 +87,16 @@ struct WelcomeView: View {
                         step: 1
                     )
                     
-                    NavigationLink(destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $repsPerSet)) {
+                    NavigationLink(
+                        destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $repsPerSet),
+                        isActive: $navigateToGame
+                    ) {
+                        EmptyView()
+                    }
+
+                    Button(action: {
+                        navigateToGame = true
+                    }) {
                         Text("Start Exercising")
                             .font(.system(size: 24))
                             .foregroundColor(.white)
@@ -96,6 +106,7 @@ struct WelcomeView: View {
                             .background(Color.green)
                             .cornerRadius(8)
                     }
+
                     
                     ControlBar()
                 }
@@ -112,6 +123,13 @@ struct WelcomeView: View {
                     await registerRpcMethods()
                 }
             }
+            .onChange(of: uiClient.shouldStartGame) { newValue in
+                if newValue {
+                    navigateToGame = true
+                    uiClient.shouldStartGame = false // reset
+                }
+            }
+           
             .onDisappear {
                 uiClient.disconnect()
             }
@@ -160,7 +178,17 @@ struct WelcomeView: View {
                 return "Error: \(error.localizedDescription)"
             }
         }
+        await room.localParticipant.registerRpcMethod("start_game") { data in
+            print("Voice command received to start game")
+
+            DispatchQueue.main.async {
+                self.uiClient.startGameFromCommand()
+            }
+
+            return "Game started"
+        }
     }
+    
 }
 
 struct ColorData: Codable {

@@ -8,6 +8,7 @@ class UIUpdateClient: ObservableObject {
     private var session: URLSession?
     private var reconnectTimer: Timer?
     
+    @Published var shouldStartGame: Bool = false
     @Published var backgroundColor: Color = .white
     @Published var textSize: CGFloat = 16
     
@@ -86,7 +87,11 @@ class UIUpdateClient: ObservableObject {
         }
     }
     
-    
+    func startGameFromCommand() {
+        DispatchQueue.main.async {
+            self.shouldStartGame = true
+        }
+    }
     
     func updateBackgroundColor(_ colorString: String) {
         /*

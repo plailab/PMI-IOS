@@ -6,6 +6,21 @@ import LiveKit
 import LiveKitKrispNoiseFilter
 #endif
 
+// NEXT THINGS TO ADD:
+// Add RPC methods for
+// Next Exercise
+// How many reps
+
+// skipping exercises
+// Give instructions if they are not getting the right points (give a small timer)
+// Add a function if form is wrong (show a video if it takes too long)
+
+// Introduction video
+// add sound effect for each arrow
+
+// look at wii sports, where the thing will make the ooooh when it fails
+
+
 struct WelcomeView: View {
     @State private var selection = "Shoulder Raises"
     @StateObject private var room = Room() // the server the user is in
@@ -178,6 +193,7 @@ struct WelcomeView: View {
                 return "Error: \(error.localizedDescription)"
             }
         }
+        
         await room.localParticipant.registerRpcMethod("start_game") { data in
             print("Voice command received to start game")
 

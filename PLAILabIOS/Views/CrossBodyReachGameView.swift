@@ -5,7 +5,7 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
     var size: CGSize
     @State var arrowLeft: Bool = true
     @State var neckPos: CGPoint = .zero
-    let touchingOffset: CGFloat = 30.0
+    let touchingOffset: CGFloat = 50.0
     @State var arrows: [Arrow] = []
     
     struct Arrow: Hashable {

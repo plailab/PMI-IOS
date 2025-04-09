@@ -1,20 +1,20 @@
 import SwiftUI
 
+// Idea: try to place your feet in the bottom center of the screen
+// make it up and down facing the camera
 struct LegRaiseGameView: View {
     @ObservedObject var poseEstimator: PoseEstimator
     var size: CGSize
     @State private var frameIndex = 1
-    let normalFrameCount = 4 // Number of frames for gold block animation
-    let poppedFrameCount = 3  // Frames for popped version
+    let frameCount = 3
 
-    @State private var goldBlockPos = CGPoint.zero
-    @State private var blockAtTop = false // Start at top by default
-    @State private var blockIsHit: Bool = false
-    @State private var goldBlockPosUp = CGPoint.zero
-    @State private var goldBlockPosDown = CGPoint.zero
+    @State private var applePos = CGPoint.zero
+    @State private var appleAtTop = true // Start at top by default
+    @State private var applePosUp = CGPoint.zero
+    @State private var applePosDown = CGPoint.zero
     
     
-    let touchingOffset: CGFloat = 30.0
+    let touchingOffset: CGFloat = 60.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -22,45 +22,37 @@ struct LegRaiseGameView: View {
             let screenHeight = geometry.size.height
             
             ZStack {
-                if !blockIsHit {
-                    Image("goldblock/goldblock\(frameIndex)")
+                if applePos != CGPoint.zero {
+                    Image("apple")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 50, height: 50)
-                        .rotationEffect(blockAtTop ? .degrees(0) : .degrees(-90)) // Rotate if at bottom
-                        .position(goldBlockPos)
-                } else {
-                    Image("goldblock/popped\(frameIndex)")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 140, height: 140)
-                        .rotationEffect(blockAtTop ? .degrees(0) : .degrees(-90)) // Rotate if at bottom
-                        .position(goldBlockPos)
+                        .position(applePos)
                 }
                 // Display Mario and Luigi based on ankle positions
                 if let leftAnkle = poseEstimator.bodyParts[.leftAnkle]?.location {
-                    Image("mario-running")
+                    Image("pacman\(frameIndex)")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 40, height: 40)
                         .position(inversePoint(leftAnkle, in: size))
                 }
                 
                 if let rightAnkle = poseEstimator.bodyParts[.rightAnkle]?.location {
-                    Image("luigi-running")
+                    Image("pacman\(frameIndex)")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 40, height: 40)
                         .position(inversePoint(rightAnkle, in: size))
                 }
             }
             .onAppear {
                 startGoldBlockAnimation()
                 // Initialize gold block positions based on screen size
-                goldBlockPosUp = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.7)
-                goldBlockPosDown = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.8)
+                applePosUp = CGPoint(x: screenWidth * 0.78, y: screenHeight * 0.7)
+                applePosDown = CGPoint(x: screenWidth * 0.25, y: screenHeight * 0.75)
                 
-                goldBlockPos = blockAtTop ? goldBlockPosUp : goldBlockPosDown
+                applePos = appleAtTop ? applePosUp : applePosDown
             }
             .onChange(of: poseEstimator.bodyParts) { _ in
                 // Update points whenever the bodyParts change
@@ -70,25 +62,19 @@ struct LegRaiseGameView: View {
                     let invLeftAnkle = inversePoint(leftAnkle, in: size)
                     let invRightAnkle = inversePoint(rightAnkle, in: size)
                     
-                    let goldBlockPosUp = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.7)
-                    let goldBlockPosDown = CGPoint(x: screenWidth * 0.3, y: screenHeight * 0.9)
+                    let applePosUp = CGPoint(x: screenWidth * 0.75, y: screenHeight * 0.7)
+                    let applePosDown = CGPoint(x: screenWidth * 0.4, y: screenHeight * 0.9)
                     
                     // only check collision when the block is not hit (no checking during animation)
-                    if !blockIsHit && (goldBlockPos.distance(to: invLeftAnkle) <= touchingOffset ||
-                        goldBlockPos.distance(to: invRightAnkle) <= touchingOffset) {
-                        blockIsHit = true
+                    if (applePos.distance(to: invLeftAnkle) <= touchingOffset ||
+                        applePos.distance(to: invRightAnkle) <= touchingOffset) {
                         frameIndex = 1
                         //only increase the score when it is hitting the top one, given that 1 top 1 bottom is one rep
-                        if blockAtTop {
+                        if appleAtTop {
                             poseEstimator.exerciseCount += 1
                         }
-                        // Switch back to normal after animation completes
-                        DispatchQueue.main.asyncAfter(deadline: .now() + (0.2 * Double(poppedFrameCount))) {
-                            frameIndex = 1
-                            blockAtTop.toggle()
-                            goldBlockPos = blockAtTop ? goldBlockPosUp : goldBlockPosDown
-                            blockIsHit = false
-                        }
+                        appleAtTop.toggle()
+                        applePos = appleAtTop ? applePosUp : applePosDown
                     }
                 }
             }
@@ -98,7 +84,7 @@ struct LegRaiseGameView: View {
     // Start animation timer for gold block
     private func startGoldBlockAnimation() {
         Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
-            frameIndex = (frameIndex % (blockIsHit ? poppedFrameCount : normalFrameCount)) + 1
+            frameIndex = (frameIndex % frameCount) + 1
         }
     }
 }

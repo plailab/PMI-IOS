@@ -15,6 +15,7 @@ import LiveKitKrispNoiseFilter
 // Give instructions if they are not getting the right points (give a small timer)
 // Add a function if form is wrong (show a video if it takes too long)
 
+// Non rpc functions
 // Introduction video
 // add sound effect for each arrow
 
@@ -26,18 +27,16 @@ struct WelcomeView: View {
     @StateObject private var room = Room() // the server the user is in
     @StateObject private var uiClient = UIUpdateClient() // ui styling (put front end aesthetics changes here)
     @State private var navigateToGame = false
-
+    @State private var name: String = ""
+    let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
+    @State private var repsPerSet: Int = 12  // Parent owns state
+    
+    
     // Krisp is available only on iOS and macOS right now (helps with noise cancellation)
     #if os(iOS) || os(macOS)
     private let krispProcessor = LiveKitKrispNoiseFilter()
     #endif
     
-    @State private var name: String = ""
-//    let exercises = ["Shoulder Raises", "Leg Raises", "Squats", "Knee Extensions (No)", "Raise Them Knees (No)"]
-    // exercises that are playable currently
-    let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
-    let synthesizer = AVSpeechSynthesizer()
-    @State private var repsPerSet: Int = 12  // Parent owns state
     init() {
         print("WelcomeView initialized")
 

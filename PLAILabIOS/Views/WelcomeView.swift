@@ -29,7 +29,6 @@ struct WelcomeView: View {
     @State private var navigateToGame = false
     @State private var name: String = ""
     let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
-    @State private var repsPerSet: Int = 12  // Parent owns state
     
     
     // Krisp is available only on iOS and macOS right now (helps with noise cancellation)
@@ -89,20 +88,20 @@ struct WelcomeView: View {
                         }
                     }
                     
-                    Text("Reps per Sets: \(Int(repsPerSet))")
+                    Text("Reps per Sets: \(Int(uiClient.reps))")
                         .font(.headline)
                     
                     Slider(
                         value: Binding(
-                            get: { Double(repsPerSet) },
-                            set: { repsPerSet = Int($0) }
+                            get: { Double(uiClient.reps) },
+                            set: { uiClient.reps = Int($0) }
                         ),
                         in: 0...24,
                         step: 1
                     )
                     
                     NavigationLink(
-                        destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $repsPerSet),
+                        destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $uiClient.reps),
                         isActive: $navigateToGame
                     ) {
                         EmptyView()
@@ -202,12 +201,59 @@ struct WelcomeView: View {
 
             return "Game started"
         }
+        
+       
+        
+        await room.localParticipant.registerRpcMethod("change_reps") { data in
+            print("Received background color data: \(data)")
+
+            guard let payloadStart = "\(data)".range(of: "payload: \""),
+                  let payloadEnd = "\(data)".range(of: "\", responseTimeout") else {
+                print("Failed to locate payload in string")
+                return "Error: Payload not found"
+            }
+
+            let startIndex = payloadStart.upperBound
+            let endIndex = payloadEnd.lowerBound
+            let payloadString = String("\(data)"[startIndex..<endIndex])
+                .replacingOccurrences(of: "\\\"", with: "\"")
+                .replacingOccurrences(of: "\\\\", with: "\\")
+
+            print("Extracted payload for reps: \(payloadString)")
+
+            guard let jsonData = payloadString.data(using: .utf8) else {
+                print("Failed to convert to data")
+                return "Error: Data conversion failed"
+            }
+           
+
+            
+            do {
+
+                let decoded = try JSONDecoder().decode(RepData.self, from: jsonData)
+                let repsString = decoded.reps
+                DispatchQueue.main.async {
+                    self.uiClient.changeReps(Int(repsString)!) // Update UI background
+                }
+                print("new rep count: \(uiClient.reps)")
+
+                return "Rep count changed successfully"
+            } catch {
+                print("JSON decoding error: \(error)")
+                return "Error: \(error.localizedDescription)"
+            }
+        }
+        
     }
     
 }
 
 struct ColorData: Codable {
     let color: String
+}
+
+struct RepData: Codable {
+    let reps: String
 }
 
 

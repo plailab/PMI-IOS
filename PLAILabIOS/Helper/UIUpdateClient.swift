@@ -10,6 +10,7 @@ class UIUpdateClient: ObservableObject {
     
     @Published var shouldStartGame: Bool = false
     @Published var backgroundColor: Color = .white
+    @Published var reps: Int = 12
     @Published var textSize: CGFloat = 16
     
     func connect() {
@@ -90,6 +91,14 @@ class UIUpdateClient: ObservableObject {
     func startGameFromCommand() {
         DispatchQueue.main.async {
             self.shouldStartGame = true
+        }
+    }
+    
+    // RIGHT HERE NEEDS TO BE CHANGED
+    func changeReps(_ reps: Int) {
+        DispatchQueue.main.async {
+            self.reps = reps
+            print(self.reps)
         }
     }
     

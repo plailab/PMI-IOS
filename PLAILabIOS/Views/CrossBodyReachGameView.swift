@@ -92,6 +92,7 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
                         poseEstimator.exerciseCount += 1
                     }
                     arrowLeft.toggle()
+                    AudioPlayer.playScore()
                 }
             }
         }

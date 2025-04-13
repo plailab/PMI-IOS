@@ -74,6 +74,7 @@ struct LegRaiseGameView: View {
                             poseEstimator.exerciseCount += 1
                         }
                         appleAtTop.toggle()
+                        AudioPlayer.playScore()
                         applePos = appleAtTop ? applePosUp : applePosDown
                     }
                 }

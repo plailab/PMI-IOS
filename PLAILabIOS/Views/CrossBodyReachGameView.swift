@@ -5,8 +5,10 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
     var size: CGSize
     @State var arrowLeft: Bool = true
     @State var neckPos: CGPoint = .zero
-    let touchingOffset: CGFloat = 30.0
+    let touchingOffset: CGFloat = 50.0
     @State var arrows: [Arrow] = []
+    @State private var frameIndex = 1
+    let frameCount = 3 // number of pacman figures to animate, currently 3
     
     struct Arrow: Hashable {
         var pos: CGPoint
@@ -38,6 +40,25 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
         let screenHeight = geometry.size.height
         
         return ZStack {
+            if poseEstimator.bodyParts[.leftWrist]?.x ?? 0 != 0 {
+                Image("pacman\(frameIndex)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .rotationEffect(Angle(degrees: 90))
+                    .position(inversePoint(poseEstimator.bodyParts[.leftWrist]!.location, in: size))
+            }
+
+            if poseEstimator.bodyParts[.rightWrist]?.x ?? 0 != 0 {
+                Image("pacman\(frameIndex)")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .rotationEffect(Angle(degrees: 90))
+                    .scaleEffect(x: -1, y: 1) // Reflect across Y-axis
+                    .position(inversePoint(poseEstimator.bodyParts[.rightWrist]!.location, in: size))
+            }
+            
             ForEach(arrows, id: \.self) { arrow in
                 if !arrow.touched{
                     Image("arrow")
@@ -55,6 +76,10 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
                 neckPos = CGPoint(x: screenWidth/2, y: screenHeight/2)
             }
             arrows = createArrows(screenWidth: screenWidth, screenHeight: screenHeight, yPos: neckPos.y)
+            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
+                // Loop through frames
+                frameIndex = (frameIndex % frameCount) + 1
+            }
         }.onChange(of: poseEstimator.bodyParts) { _ in
             // Update points whenever the bodyParts change
             if let leftWrist = poseEstimator.bodyParts[.leftWrist]?.location,
@@ -83,16 +108,21 @@ struct CrossBodyReachGameView: ExerciseGameViewProtocol {
                     neckPos = inversePoint(neck, in: size)
                 }
                 
-                // Toggle the arrowLeft for alternating left-right checks
-                if arrows.allSatisfy({ $0.touched }) {
-                    // All arrows have been touched, reset or update the state as needed
-                    // For example, reset the arrows if desired
+                let touchedArrowsCount = arrows.filter { $0.touched }.count
+                let expectedLastArrow = arrowLeft ? arrows.first : arrows.last
+
+                if touchedArrowsCount >= 2, expectedLastArrow?.touched == true {
+                    // At least 2 arrows touched AND the correct end arrow is touched (based on direction)
                     arrows = createArrows(screenWidth: geometry.size.width, screenHeight: geometry.size.height, yPos: neckPos.y)
-                    if !arrowLeft{
+                    
+                    if !arrowLeft {
                         poseEstimator.exerciseCount += 1
                     }
+
                     arrowLeft.toggle()
+                    AudioPlayer.playScore()
                 }
+
             }
         }
 

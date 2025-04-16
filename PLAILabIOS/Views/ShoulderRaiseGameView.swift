@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 struct ShoulderRaiseGameView: View {
     @ObservedObject var poseEstimator: PoseEstimator
@@ -11,7 +12,7 @@ struct ShoulderRaiseGameView: View {
     
     @State private var armLength = CGFloat(0)
     
-    let collisionTolerance: CGFloat = 50.0
+    let collisionTolerance: CGFloat = 60.0
     let dotOffsetY: CGFloat = 200.0
     
     var body: some View {
@@ -110,6 +111,8 @@ struct ShoulderRaiseGameView: View {
                                     
                                     showDotTop.toggle()
                                     
+                                    AudioPlayer.playScore()
+                                    
                                     // Move dots to the bottom position
                                     dotPositionLeft = (inverseLeftShoulder + CGPoint(x: -armLength/2, y: 40)).bounded(to: size)
                                     dotPositionRight = (inverseRightShoulder + CGPoint(x: armLength/2, y: 40)).bounded(to: size)
@@ -121,16 +124,18 @@ struct ShoulderRaiseGameView: View {
                                     
                                     showDotTop.toggle()
                                     
+                                    AudioPlayer.playScore()
+                                    
                                     // Move dots to the top position
                                     dotPositionLeft = (inverseLeftShoulder - CGPoint(x: 0, y: armLength)).bounded(to: size)
                                     dotPositionRight = (inverseRightShoulder - CGPoint(x: 0, y: armLength)).bounded(to: size)
                                 }
+                                
                             }
-                            
                         }
                     }
+                    
                 }
-                
             }
         }
     }

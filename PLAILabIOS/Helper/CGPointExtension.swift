@@ -13,9 +13,11 @@ extension CGPoint {
         return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
     }
     func bounded(to size: CGSize) -> CGPoint {
+        print(x, y)
+        print("size: ", size.width, size.height)
         return CGPoint(
-            x: min(max(x, 0), size.width),
-            y: min(max(y, 0), size.height)
+            x: min(max(x, size.width*0.2), size.width*0.9),
+            y: min(max(y, size.height*0.2), size.height*0.9)
         )
     }
 }

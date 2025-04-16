@@ -71,6 +71,19 @@ struct WelcomeView: View {
                             if let currentIndex = exercises.firstIndex(of: selection) {
                                 let nextIndex = (currentIndex + 1) % exercises.count
                                 selection = exercises[nextIndex]
+                                
+                                let payload: [String: Any] = [
+                                    "current_exercise": selection
+                                ]
+                                
+                                Task{
+                                    do {
+                                        print("sent the payload")
+                                        try await self.sendMessageViaLiveKit(payload, reliable: true)
+                                    } catch {
+                                        print("Failed to send message: \(error.localizedDescription)")
+                                    }
+                                }
                             }
                         }) {
                             HStack {
@@ -149,8 +162,18 @@ struct WelcomeView: View {
         }
     }
 
-    
-    
+    func sendMessageViaLiveKit(_ message: [String: Any], reliable: Bool = true) async throws {
+        // Convert the message dictionary to Data
+        guard let data = try? JSONSerialization.data(withJSONObject: message) else {
+            throw NSError(domain: "MessageError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to serialize message"])
+        }
+        
+        // Create publish options
+        let options = DataPublishOptions(reliable: reliable)
+        
+        // Publish the data to the room
+        try await room.localParticipant.publish(data: data, options: options)
+    }
     
     
     func registerRpcMethods() async {

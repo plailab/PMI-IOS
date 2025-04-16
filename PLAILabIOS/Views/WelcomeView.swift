@@ -9,7 +9,8 @@ import LiveKitKrispNoiseFilter
 // NEXT THINGS TO ADD:
 // Add RPC methods for
 // Next Exercise
-// How many reps
+// skip rest
+// go back to last screen
 
 // skipping exercises
 // Give instructions if they are not getting the right points (give a small timer)

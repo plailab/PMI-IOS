@@ -9,6 +9,7 @@ class UIUpdateClient: ObservableObject {
     private var reconnectTimer: Timer?
     
     @Published var shouldStartGame: Bool = false
+    @Published var shouldGoBack: Bool = false
     @Published var backgroundColor: Color = .white
     @Published var reps: Int = 12
     @Published var textSize: CGFloat = 16

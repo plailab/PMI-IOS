@@ -14,7 +14,7 @@ struct BodyPoseDetectionView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var poseEstimator: PoseEstimator
-    
+    @EnvironmentObject var uiClient: UIUpdateClient
     // Timer and exercise related properties
     @State private var counter = 0
     private let timerLimit = 60 // timer for rest
@@ -136,6 +136,13 @@ struct BodyPoseDetectionView: View {
         .onDisappear {
             stopTimer()
             UIApplication.shared.isIdleTimerDisabled = false
+        }
+        .onChange(of: uiClient.shouldGoBack) { newValue in
+            print(uiClient.shouldGoBack)
+            if newValue {
+                presentationMode.wrappedValue.dismiss()
+                uiClient.shouldGoBack = false // reset it after going back
+            }
         }
     }
     

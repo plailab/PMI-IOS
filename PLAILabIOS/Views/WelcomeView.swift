@@ -115,7 +115,8 @@ struct WelcomeView: View {
                     )
                     
                     NavigationLink(
-                        destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $uiClient.reps),
+                        destination: BodyPoseDetectionView(exercise: selection, repsPerSet: $uiClient.reps)
+                            .environmentObject(uiClient), // pass uiclient so they are all sharing the same class 
                         isActive: $navigateToGame
                     ) {
                         EmptyView()
@@ -226,6 +227,16 @@ struct WelcomeView: View {
             return "Game started"
         }
         
+        await room.localParticipant.registerRpcMethod("exit_game") { data in
+            print("Voice command received to go back")
+
+            DispatchQueue.main.async {
+                self.uiClient.shouldGoBack = true
+            }
+
+            return "Navigating back to previous screen"
+        }
+
        
         
         await room.localParticipant.registerRpcMethod("change_reps") { data in

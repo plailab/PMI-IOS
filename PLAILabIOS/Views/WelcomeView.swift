@@ -147,14 +147,39 @@ struct WelcomeView: View {
                 room.add(delegate: krispProcessor)
                 #endif
                 uiClient.connect()
+                                
                 Task {
                     await registerRpcMethods()
+
+                    while true {
+                        do {
+                            try await self.sendMessageViaLiveKit(
+                                ["all_exercises": exercises, "current_exercise": selection],
+                                reliable: true
+                            )
+                            print("Message sent successfully")
+                            break // Exit loop on success
+                        } catch {
+                            print("Failed to send message: \(error.localizedDescription)")
+                            // had to delay because the message might not be received when immediately connected to the server, the dataTrack might not be attatched completely
+                            try? await Task.sleep(nanoseconds: 2_000_000_000) // 2 sec delay
+                        }
+                    }
                 }
             }
             .onChange(of: uiClient.shouldStartGame) { newValue in
                 if newValue {
                     navigateToGame = true
                     uiClient.shouldStartGame = false // reset
+                }
+            }
+            .onChange(of: selection) { newValue in
+                Task {
+                    do {
+                        try await self.sendMessageViaLiveKit(["current_exercise": newValue], reliable: true)
+                    } catch {
+                        print("Failed to send message: \(error.localizedDescription)")
+                    }
                 }
             }
            
@@ -227,6 +252,35 @@ struct WelcomeView: View {
             return "Game started"
         }
         
+        await room.localParticipant.registerRpcMethod("select_exercise") { data in
+            print("Received selected exercise data: \(data.payload)")
+            
+            let message = data.payload
+            
+            var exercise = ""
+            // Extract JSON substring from the message
+            if let jsonStartIndex = message.firstIndex(of: "{") {
+                let jsonSubstring = message[jsonStartIndex...]
+                
+                if let jsonData = jsonSubstring.data(using: .utf8) {
+                    do {
+                        let decoded = try JSONDecoder().decode(ExerciseData.self, from: jsonData)
+                        exercise = decoded.exercise
+                        print("Exercise:", decoded.exercise)
+                    } catch {
+                        print("Decoding error:", error)
+                    }
+                } else {
+                    return "Failed to encode JSON substring into Data"
+                }
+            } else {
+                return "No JSON found in message"
+            }
+            
+            navigateToGame = true
+            selection = exercise
+            return "Exercise \(exercise) selected successfully"
+        }
         await room.localParticipant.registerRpcMethod("exit_game") { data in
             print("Voice command received to go back")
 
@@ -238,7 +292,6 @@ struct WelcomeView: View {
         }
 
        
-        
         await room.localParticipant.registerRpcMethod("change_reps") { data in
             print("Received background color data: \(data)")
 
@@ -291,6 +344,9 @@ struct RepData: Codable {
     let reps: String
 }
 
+struct ExerciseData: Codable {
+    let exercise: String
+}
 
 
 // Function to configure audio routing

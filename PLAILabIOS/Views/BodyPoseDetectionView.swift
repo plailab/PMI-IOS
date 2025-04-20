@@ -144,6 +144,14 @@ struct BodyPoseDetectionView: View {
                 uiClient.shouldGoBack = false // reset it after going back
             }
         }
+        .onChange(of: uiClient.skipRestFlag) { newValue in
+            if newValue && isResting {
+                print("Skipping rest via RPC")
+                endRestPeriod()
+                uiClient.skipRestFlag = false // reset after handling
+            }
+        }
+
     }
     
     // Start rest period after completing a set

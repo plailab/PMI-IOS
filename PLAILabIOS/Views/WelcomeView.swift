@@ -290,6 +290,18 @@ struct WelcomeView: View {
 
             return "Navigating back to previous screen"
         }
+        
+        await room.localParticipant.registerRpcMethod("skip_rest") { data in
+            print("Voice command received to skip rest")
+
+            DispatchQueue.main.async {
+                self.uiClient.skipRestFlag = true
+            }
+
+            return "Rest skipped"
+        }
+
+
 
        
         await room.localParticipant.registerRpcMethod("change_reps") { data in

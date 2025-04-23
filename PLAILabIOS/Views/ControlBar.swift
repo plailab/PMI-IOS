@@ -76,8 +76,10 @@ struct ControlBar: View {
                     AudioDeviceSelector()
                     #endif
                 }
-                .background(.primary.opacity(0.1))
-                .cornerRadius(8)
+                .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color(.systemGray5))
+                        )                .cornerRadius(8)
 
                 DisconnectButton(disconnectAction: disconnect)
                     .matchedGeometryEffect(id: "main-button", in: animation, properties: .position)
@@ -180,9 +182,8 @@ private struct ConnectButton: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .background(
-            .primary.opacity(0.1)
-        )
+        .background(Color(.systemGray5))
+
         .foregroundStyle(.primary)
         .cornerRadius(8)
     }
@@ -206,8 +207,9 @@ private struct DisconnectButton: View {
         }
         .buttonStyle(.plain)
         .background(
-            .red.opacity(0.9)
-        )
+                   RoundedRectangle(cornerRadius: 8)
+                       .fill(Color.red)
+               )
         .foregroundStyle(.white)
         .cornerRadius(8)
     }
@@ -226,8 +228,9 @@ private struct TransitionButton: View {
         .frame(height: 44)
         .padding(.horizontal, 16)
         .background(
-            .primary.opacity(0.1)
-        )
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color(.systemGray5))
+                )
         .foregroundStyle(.secondary)
         .cornerRadius(8)
         .disabled(true)

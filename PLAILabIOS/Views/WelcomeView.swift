@@ -6,19 +6,12 @@ import LiveKit
 import LiveKitKrispNoiseFilter
 #endif
 
-// NEXT THINGS TO ADD:
-// Add RPC methods for
-// Next Exercise
-// skip rest
-// go back to last screen
-
 // skipping exercises
 // Give instructions if they are not getting the right points (give a small timer)
 // Add a function if form is wrong (show a video if it takes too long)
 
 // Non rpc functions
 // Introduction video
-// add sound effect for each arrow
 
 // look at wii sports, where the thing will make the ooooh when it fails
 
@@ -279,7 +272,7 @@ struct WelcomeView: View {
             
             navigateToGame = true
             selection = exercise
-            return "Exercise \(exercise) selected successfully"
+            return "Exercise \(exercise) selected successfully & started exercise"
         }
         await room.localParticipant.registerRpcMethod("exit_game") { data in
             print("Voice command received to go back")
@@ -300,9 +293,6 @@ struct WelcomeView: View {
 
             return "Rest skipped"
         }
-
-
-
        
         await room.localParticipant.registerRpcMethod("change_reps") { data in
             print("Received background color data: \(data)")

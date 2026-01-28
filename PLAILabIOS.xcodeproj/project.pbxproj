@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023B87702EC5557800CF4251 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 023B876F2EC5557800CF4251 /* SDWebImageSwiftUI */; };
 		4B44D2142D9C04D6009C43E8 /* LiveKitComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 4B44D2132D9C04D6009C43E8 /* LiveKitComponents */; };
 		4B5E6B192D9B4B08003B0F3A /* LiveKitKrispNoiseFilter in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5E6B182D9B4B08003B0F3A /* LiveKitKrispNoiseFilter */; };
 		4B5E6B1B2D9B4B0B003B0F3A /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4B5E6B1A2D9B4B0B003B0F3A /* LiveKit */; };
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023B87702EC5557800CF4251 /* SDWebImageSwiftUI in Frameworks */,
 				4B5E6B1B2D9B4B0B003B0F3A /* LiveKit in Frameworks */,
 				4B5E6B192D9B4B08003B0F3A /* LiveKitKrispNoiseFilter in Frameworks */,
 				4B9955B82D73A7D1005D8A73 /* OpenAI in Frameworks */,
@@ -152,6 +154,7 @@
 				4B5E6B182D9B4B08003B0F3A /* LiveKitKrispNoiseFilter */,
 				4B5E6B1A2D9B4B0B003B0F3A /* LiveKit */,
 				4B44D2132D9C04D6009C43E8 /* LiveKitComponents */,
+				023B876F2EC5557800CF4251 /* SDWebImageSwiftUI */,
 			);
 			productName = PLAILabIOS;
 			productReference = 4B13DC752D471C7D00378B82 /* PLAILabIOS.app */;
@@ -241,6 +244,7 @@
 				4B5E6B152D9B4AE6003B0F3A /* XCRemoteSwiftPackageReference "swift-krisp-noise-filter" */,
 				4B44D20F2D9C0454009C43E8 /* XCRemoteSwiftPackageReference "swift-docc-plugin" */,
 				4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */,
+				023B876E2EC5557800CF4251 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4B13DC762D471C7D00378B82 /* Products */;
@@ -476,7 +480,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.x;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.PLAI;
+>>>>>>> 02fa5569c4af8b1dc2098303691e5e850f8c1787
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -509,7 +517,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.x;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.PLAI;
+>>>>>>> 02fa5569c4af8b1dc2098303691e5e850f8c1787
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -631,6 +643,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		023B876E2EC5557800CF4251 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4;
+			};
+		};
 		4B44D20F2D9C0454009C43E8 /* XCRemoteSwiftPackageReference "swift-docc-plugin" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-docc-plugin.git";
@@ -674,6 +694,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		023B876F2EC5557800CF4251 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 023B876E2EC5557800CF4251 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		4B44D2112D9C04CE009C43E8 /* LiveKitComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4B44D2102D9C04A7009C43E8 /* XCRemoteSwiftPackageReference "components-swift" */;

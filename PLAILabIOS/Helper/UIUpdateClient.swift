@@ -10,7 +10,7 @@ class UIUpdateClient: ObservableObject {
     
     @Published var skipRestFlag: Bool = false
     @Published var shouldStartGame: Bool = false
-    @Published var shouldGoBack: Bool = false
+    @Published var shouldGoBack: Bool  = false
     @Published var restTimer: Int = 60
     @Published var backgroundColor: Color = .white
     @Published var reps: Int = 12

@@ -36,9 +36,22 @@
 		4B13DC8F2D471C7E00378B82 /* PLAILabIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLAILabIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4B3461C02EBDAC6600A4F8BF /* Exceptions for "PLAILabIOS" folder in "PLAILabIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4B13DC742D471C7D00378B82 /* PLAILabIOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4B13DC772D471C7D00378B82 /* PLAILabIOS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4B3461C02EBDAC6600A4F8BF /* Exceptions for "PLAILabIOS" folder in "PLAILabIOS" target */,
+			);
 			path = PLAILabIOS;
 			sourceTree = "<group>";
 		};
@@ -446,9 +459,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 47BX55MGYF;
+				DEVELOPMENT_TEAM = 35RZ3MB55U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PLAILabIOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to detect hand poses.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access to be able to talk to you!";
@@ -462,7 +476,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.xnmksd;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.x;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -478,9 +492,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PLAILabIOS/Preview Content\"";
-				DEVELOPMENT_TEAM = 47BX55MGYF;
+				DEVELOPMENT_TEAM = 35RZ3MB55U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PLAILabIOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires camera access to detect hand poses.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires microphone access to be able to talk to you!";
@@ -494,7 +509,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.xnmksd;
+				PRODUCT_BUNDLE_IDENTIFIER = X.PLAILabIOS.x;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -25,7 +25,7 @@ struct WelcomeView: View {
     let exercises = ["Shoulder Raises", "Leg Raises", "Cross Body Reach"]
     
     
-    // Krisp is available only on iOS and macOS right now (helps with noise cancellation)
+    // Krisp is available only on iOS and -macOS right now (helps with noise cancellation)
     #if os(iOS) || os(macOS)
     private let krispProcessor = LiveKitKrispNoiseFilter()
     #endif
